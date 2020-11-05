@@ -1,0 +1,32 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding">
+
+  <div class="profile">
+    <div class="picture" [class.open]="AnimateProfile">
+      <ion-avatar class="ion-text-center" (click)="viewPictureAsync()" >
+        <ion-icon color="medium" name="person"></ion-icon>
+        <ion-img class="ion-hide"></ion-img>
+      </ion-avatar>
+    </div>
+      
+    <div class="ion-activatable btn" (click)="choosePictureAsync()" [class.ion-hide]="AnimateProfile">
+      <ion-icon slot="icon-only" name="camera"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+  </div>
+
+  <div *ngFor="let input of EditInputs">
+    <ion-list-header *ngIf="input.hasHeader">{{ input.headerTitle }}</ion-list-header>
+    <app-edit-profile-input 
+    [label]="input.label" 
+    [model]="input.model" 
+    [icon]="input.icon"
+    [updateInput]="input.updateInput"
+    (onChangeEvent)="input.inputChange()"
+    ></app-edit-profile-input>
+    <br>
+  </div>
+  
+</ion-content>

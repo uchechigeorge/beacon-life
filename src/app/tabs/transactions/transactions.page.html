@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top ion-text-center">
+
+  <ion-text>These are your recent transaction history</ion-text>
+
+  <br><br><br>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let card of TransactionCards"
+        size="12"
+        sizeMd="6"
+        sizeLg="4">
+        <app-transaction-card 
+          [cardType]="card.type"
+          [transcationType]="card.transactionType"
+          [amount]="card.amount"
+          [cardHolder]="card.cardHolder"
+          [date]="card.date"
+        ></app-transaction-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

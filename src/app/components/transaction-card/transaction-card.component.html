@@ -1,0 +1,10 @@
+<ion-card [class.success]="cardType == 'success'" [class.danger]="cardType == 'danger'">
+  <ion-card-content class="ion-text-left">
+    <p class="ion-text-left">{{ transcationTypeTitle }}: {{ transcationType }}</p>
+    <p class="ion-text-left">{{ cardHolderTitle }}: {{ cardHolder }}</p>
+    <p class="ion-text-left">{{ amountTitle }}: <ion-text [color]="cardType">{{ amount | currency }}</ion-text></p>
+    <p class="ion-text-left">{{ dateTitle }}: {{ date }}</p>
+  </ion-card-content>
+
+  <app-card-circle class="card-type" [circle]="cardType"></app-card-circle>
+</ion-card>

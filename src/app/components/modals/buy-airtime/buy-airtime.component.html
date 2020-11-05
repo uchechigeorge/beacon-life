@@ -1,0 +1,57 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding">
+
+  <div class="logo">
+    <ion-icon name="call-outline" color="success"></ion-icon>
+  </div>
+
+  <br><br>
+
+  <div class="input">
+
+    <ion-item>
+      <ion-label class="label">{{ NetworkLabel }}</ion-label>
+      <ion-select class="select" [placeholder]="NetworkPlaceholder"
+        (ionBlur)="bankInputBlur()"
+        (ionChange)="bankInputChange()" [(ngModel)]="NetworkModel">
+        <ion-select-option *ngFor="let bank of AvailableBanks" [value]="bank.value">
+          {{ bank.text }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-text color='danger' class="warning-text"><p>
+      {{ BankErrorText }}
+    </p></ion-text>
+  </div>
+
+  <div class="input" *ngFor="let input of Inputs">
+
+    <ion-item mode="md">
+      <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
+      <ion-input [class.password-dot]="!input.passwordVisible"
+      [type]="input.type"
+      [value]="input.value"
+      [inputmode]="input.inputMode"
+      [(ngModel)]="input.model"
+      (ngModelChange)="input.modelChanged()"
+      (ionBlur)="input.inputBlur()"
+      ></ion-input>
+
+    </ion-item>
+
+    <ion-text [color]="input.detail.detailTextColor ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+      {{ input.detail.detailText }}
+    </p></ion-text>
+  </div>
+
+  <br><br><br>
+
+  <ion-button [disabled]="!IsValid" (click)="process()" 
+    size="large" shape="round" expand="block" fill="outline" class="outline">
+    <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+    <ion-text *ngIf="!IsProcessing">{{ BuyBtnText }}</ion-text>
+  </ion-button>
+  
+</ion-content>

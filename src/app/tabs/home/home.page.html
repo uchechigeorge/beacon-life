@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col *ngFor="let option of options" size="6">
+        <ion-card [color]="option.backGround" button 
+          (click)="option.handler()"  
+        >
+          <ion-card-content>
+            <ion-icon [name]="option.icon"></ion-icon>
+            <ion-text class="content"><p>
+              {{ option.title }}
+            </p></ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card class="more-info-card" color="success" button>
+          <ion-card-content>
+            <ion-text class="content"><p>
+              {{ MoreInfoText }}
+            </p></ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>    
+
+
+  <ion-row>
+    <ion-col>
+      <ion-button size="large" fill="outline" shape="round" expand="block" class="outline">
+        {{ StartEarningText }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+</ion-content>

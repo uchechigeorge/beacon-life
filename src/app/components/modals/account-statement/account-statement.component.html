@@ -1,0 +1,31 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding">
+  <div class="logo">
+    <ion-icon name="receipt-outline" color="success"></ion-icon>
+  </div>
+
+  <div class="form">
+
+    <div class="input" *ngFor="let input of Inputs">
+      <ion-item>
+      <ion-label position="floating">{{ input.label }}</ion-label>
+      <ion-datetime 
+        [pickerOptions]="{ cssClass: 'date-time' }"
+        [(ngModel)]="input.model"
+        (ionBlur)="input.inputBlur()"
+        (ionChange)="input.modelChanged()"
+      ></ion-datetime>
+      </ion-item>
+      <ion-text class="warning-text" color="danger"><p>{{ input.detail.detailText }}</p></ion-text>
+    </div>
+
+  </div>
+
+  <br><br><br>
+
+  <ion-button [disabled]="!IsValid" (click)="downloadAccStatement()" size="large" shape="round" expand="block" fill="outline" class="outline">
+    <ion-spinner *ngIf="IsDownloading" name="crescent"></ion-spinner>
+    <ion-text *ngIf="!IsDownloading">Download</ion-text>
+  </ion-button>
+</ion-content>

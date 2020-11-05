@@ -1,0 +1,36 @@
+.profile{
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+
+  ion-avatar{
+    height: 100%;
+    width: 100%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+
+    ion-icon{
+      font-size: 94px;
+    }
+  }
+}
+
+.title p{
+  font-size: 22px;
+  font-family: 'Robo-Bold';
+}
+
+.password-dot{
+  -webkit-text-security: disc;
+}
+
+.warning-text p{
+  font-size: 15px;
+  text-align: left;
+}

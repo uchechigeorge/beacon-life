@@ -1,0 +1,40 @@
+ion-card{
+  height: 120px;
+
+  ion-card-content{
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-icon{
+      font-size: 50px;
+    }
+
+    .content p{
+      font-size: 15px;
+      text-align: center;
+    }
+
+  }
+}
+
+.more-info-card{
+  margin-top: 80px;
+  height: 200px;
+
+  ion-card-content{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .content p{
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+}
+

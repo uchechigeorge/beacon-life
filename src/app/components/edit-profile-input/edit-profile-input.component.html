@@ -1,0 +1,34 @@
+<div class="input">
+
+  <div class="main-input-container">
+    <ion-item mode="md" class="main-input-item" [class.overlay-visible]="canEdit" [class.no-edit]="!canEdit">
+      <ion-label mode="md" position="stacked">{{ label }}</ion-label>
+      <ion-input mode="md" [(ngModel)]="model"
+        [value]="value"
+        [type]="type"
+        [inputmode]="inputmode"
+        (ngModelChange)="onChange($event)"
+        (ionBlur)="onBlur($event)"
+      ></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="input-item">
+    <ion-icon color="medium" [md]=" icon ? (icon + '-sharp') : ''" [ios]="icon ? ( icon + '-outline') : ''"></ion-icon>
+    <div class="labels" [class.no-edit]="canEdit">
+      <ion-label mode="md" class="top-label">{{ label }}</ion-label>
+      <ion-label mode="md" class="edit-label">{{ model }}</ion-label>
+    </div>
+    <ion-buttons>
+      <ion-button fill="clear" class="btn" (click)="setFocus()" class="clear">
+        <ion-icon color="medium" slot="icon-only" name="pencil-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <div *ngIf="canEdit" class="edit-btns ion-text-right">
+    <ion-button (click)="exitEditMode()" fill="clear" class="clear" size="default">{{ CancelText }}</ion-button>
+    <ion-button (click)="check()" fill="clear" class="clear" size="default">{{ OKText }}</ion-button>
+  </div>
+
+</div>

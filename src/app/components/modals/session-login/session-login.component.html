@@ -1,0 +1,57 @@
+<app-modal-header [title]="PageTitle" [showIcon]="false"></app-modal-header>
+
+<ion-content class="ion-padding ion-text-center">
+
+  <div class="profile">
+    <ion-avatar class="ion-text-center">
+      <ion-icon color="medium" name="person"></ion-icon>
+      <ion-img class="ion-hide"></ion-img>
+    </ion-avatar>
+  </div>
+
+  <br><br><br>
+
+  <ion-text class="title"><p>
+    {{ ContinueText }}
+  </p></ion-text>
+
+  <br><br>
+
+  <div class="input">
+
+    <ion-item mode="md">
+      <ion-label class="input-label" position="floating">{{ PinInput.label }}</ion-label>
+      <ion-input [class.password-dot]="!PinInput.passwordVisible"
+      [type]="PinInput.type"
+      [value]="PinInput.value"
+      [(ngModel)]="PinInput.model"
+      (ngModelChange)="PinInput.modelChanged()"
+      (ionBlur)="PinInput.inputBlur()"
+      ></ion-input>
+
+      <ion-buttons *ngIf="PinInput.isPassword" slot="end">
+        <ion-button [attr.tabindex]="-1" (click)="PinInput.togglePasswordVisibility()" class="clear">
+          <ion-icon color="medium" slot="icon-only"
+          [name]="PinInput.passwordIcon + '-sharp'"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-text [color]="PinInput.detail.detailTextColor ? PinInput.detail.detailTextColor : 'danger'" class="warning-text"><p>
+      {{ PinInput.detail.detailText }}
+    </p></ion-text>
+  </div>
+
+  <br><br>
+
+  <ion-button [disabled]="!VerifyValid"
+      (click)="verify()" size="large" shape="round" expand="block" fill="outline" class="outline">
+      <ion-spinner *ngIf="IsVerifying" name="crescent"></ion-spinner>
+      <ion-text *ngIf="!IsVerifying">{{ VerifyBtnText }}</ion-text>
+    </ion-button>
+  
+    <ion-button strong (click)="subTextClick()" class="clear"
+    size="dafault" fill="clear">{{ VerifySubBtnText }}</ion-button>
+
+
+</ion-content>

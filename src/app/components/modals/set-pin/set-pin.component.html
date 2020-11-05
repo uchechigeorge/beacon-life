@@ -1,0 +1,45 @@
+<app-modal-header [showIcon]="false" [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding">
+
+  <div class="logo">
+    <ion-icon color="success" name="keypad-outline"></ion-icon>
+  </div>
+
+  <br><br><br>
+
+    <div class="input" *ngFor="let input of Inputs">
+
+      <ion-item mode="md">
+        <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
+        <ion-input [class.password-dot]="!input.passwordVisible"
+        [type]="input.type"
+        [value]="input.value"
+        [inputmode]="input.inputMode"
+        [(ngModel)]="input.model"
+        (ngModelChange)="input.modelChanged()"
+        (ionBlur)="input.inputBlur()"
+        ></ion-input>
+
+        <ion-buttons *ngIf="input.isPassword" slot="end">
+          <ion-button [attr.tabindex]="-1" (click)="input.togglePasswordVisibility()" class="clear">
+            <ion-icon color="medium" slot="icon-only"
+            [name]="input.passwordIcon + '-sharp'"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-text [color]="input.detail.detailTextColor ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+        {{ input.detail.detailText }}
+      </p></ion-text>
+    </div>
+
+    <br><br>
+
+    <ion-button [disabled]="!IsValid"
+      (click)="confirm()" size="large" shape="round" expand="block" fill="outline" class="outline">
+      <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+      <ion-text *ngIf="!IsProcessing">{{ SetPinText }}</ion-text>
+    </ion-button>
+
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" >Cards</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+  <div class="logo">
+    <ion-icon color="success" name="card-outline"></ion-icon>
+  </div>
+
+  <br><br>
+
+  <div class="cards">
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let option of options" size="6">
+          <ion-card button color="success">
+            <ion-card-content class="ion-text-center">
+              <ion-text><p>
+                {{ option.text }}
+              </p></ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

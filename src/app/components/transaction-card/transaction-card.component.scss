@@ -1,0 +1,16 @@
+.card-type {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  border-radius: 15px;
+}
+
+.success{
+  border: 1px solid var(--ion-color-success);
+  border-radius: 15px;
+}
+
+.danger{
+  border: 1px solid var(--ion-color-danger);
+  border-radius: 15px;
+}

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">{{ OnSignUpPage ? SignUpTitle : SignInTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="logo">
+    <ion-icon color="success" [name]="OnSignUpPage ? SignUpLogo : SignInLogo"></ion-icon>
+  </div>
+
+  <div class="slides">
+
+    <!-- Sign Up  -->
+    <ion-slides>
+      <ion-slide class="ion-padding">
+
+        <div class="input" *ngFor="let input of SignUpInputs">
+
+          <ion-item mode="md">
+            <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
+            <ion-input
+            [type]="input.type"
+            [(ngModel)]="input.model"
+            (ngModelChange)="input.modelChanged()"
+            (ionBlur)="input.inputBlur()"
+            ></ion-input>
+
+            <ion-buttons *ngIf="input.isPassword" slot="end">
+              <ion-button [attr.tabindex]="-1" (click)="input.togglePasswordVisibility()">
+                <ion-icon color="medium" slot="icon-only"
+                [name]="input.passwordIcon + '-sharp'"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+          <ion-text [color]="input.detail.detailTextColor ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+            {{ input.detail.detailText }}
+          </p></ion-text>
+        </div>
+
+        <br><br>
+
+        <ion-button [disabled]="HasSignUpErrors" [attr.tabindex]="OnSignUpPage ? null : -1"
+         (click)="signUp()" size="large" shape="round" expand="block" fill="outline" class="outline">
+          <ion-spinner *ngIf="IsSigningUp" name="crescent"></ion-spinner>
+          <ion-text *ngIf="!IsSigningUp">{{ SignUpBtnText }}</ion-text>
+        </ion-button>
+        <ion-button strong (click)="goToSignIn()" [attr.tabindex]="OnSignUpPage ? null : -1" 
+          size="default" fill="clear" class="clear">{{ SignUpBtnSubText }}</ion-button>
+      </ion-slide>
+
+        <!-- Sign In -->
+      <ion-slide class="ion-padding">
+        <div class="input" *ngFor="let input of SignInInputs">
+
+          <ion-item mode="md">
+            <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
+            <ion-input
+            [type]="input.type"
+            [(ngModel)]="input.model"
+            (ngModelChange)="input.modelChanged()"
+            (ionBlur)="input.inputBlur()"
+            ></ion-input>
+
+            <ion-buttons *ngIf="input.isPassword" slot="end">
+              <ion-button [attr.tabindex]="-1" (click)="input.togglePasswordVisibility()">
+                <ion-icon color="medium" slot="icon-only"
+                [name]="input.passwordIcon + '-sharp'"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+          <ion-text [color]="input.detail ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+            {{ input.detail ? input.detail.detailText : '' }}
+          </p></ion-text>
+        </div>
+
+        <div class="forgot">
+          <ion-button class="ion-text-right" [attr.tabindex]="OnSignUpPage ? -1 : null" (click)="forgotPassword()"
+            strong size="default" fill="clear" class="clear">{{ ForgotPasswordText }}</ion-button>
+        </div>
+
+
+        <br><br>
+        <ion-button [disabled]="HasSignInErrors" [attr.tabindex]="OnSignUpPage ? -1 : null"
+          (click)="signIn()" size="large" shape="round" expand="block" fill="outline" class="outline">
+          <ion-spinner *ngIf="IsSigningIn" name="crescent"></ion-spinner>
+          <ion-text *ngIf="!IsSigningIn">{{ SignInBtnText }}</ion-text>
+        </ion-button>
+        <ion-button strong (click)="goToSignUp()" [attr.tabindex]="OnSignUpPage ? -1 : null"
+          size="default" fill="clear" class="clear">{{ SignInBtnSubText }}</ion-button>
+            
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+</ion-content>
