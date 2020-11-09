@@ -18,7 +18,7 @@ export class EditProfileInputComponent implements OnInit {
   @Input() label: string = '';
   @Input() OKText: string = 'OK';
   @Input() CancelText: string = 'Cancel';
-  @Input() updateInput : () => Promise<boolean>;
+  @Input() updateInput : () => boolean | void | Promise<boolean | void>;
   @Output() onBlurEvent: EventEmitter<any> = new EventEmitter();
   @Output() onChangeEvent: EventEmitter<any> = new EventEmitter();
 

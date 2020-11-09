@@ -1,0 +1,89 @@
+Components
+
+currency-type - 
+  Inputs: 
+    currency: 'dollar' | 'naira' | 'pound' | 'euro';
+  Output: HTML codes for the above symbols
+
+edit-profile-input: displays user information and options for deleting
+  @Inputs:
+    icon
+    model
+    value
+    type
+    inputmode
+    label
+    OKText
+    CancelText
+    updateInput: accepts a boolean to know if to update user input
+  @Output  
+    onBlurEvent
+    onChangeEvent
+
+transaction-card: displays a card with info about user transaction
+  @Input
+    cardType: color to display to indicate type of transaction(debit/credit)
+    transcationTypeTitle
+    transcationType
+    cardHolderTitle
+    cardHolder
+    amountTitle
+    amount
+    dateTitle
+    date
+
+#Modals
+
+account-statement
+
+add-fund-credit-card: modal for funding account via credit card
+
+add-fund-transfer: modal for funding account via transfer
+
+bank-transfer: modal for transferring money to different account
+
+beacon-transfer: modal for transferring money to different BeaconCash account
+
+buy-airtime: modal for purchasing airtime
+
+buy-currency: modal for buying currency
+
+edit-profile: modal for editing profile
+
+forgot-password: modal for forgot password
+
+modal header
+  @Input
+    title
+    showIcon: boolean to show icon
+  @Output
+    dismissEvent: executes function to execute modal
+
+pay-bills: modal for paying bills
+
+profile-picture
+
+referral-details
+
+referrals
+
+reset-password: modal to reset password
+
+reset-pin: modal to reset pin
+
+sell currency: modal to sell currency
+
+session-login: modal for putting pin
+
+set-pin: modal for setting pin
+
+verify account: modal to browse for verification items to upload
+
+
+Directives
+  card-expiry-date-input: if true, transforms input text to match the format 20/20 .... /^[0-9]{2}\/[0-9]{2}$/ 😁
+  card-number-input: if true, transforms text to group of 4s, eg: 0000 0000 0000 0000 which mimics how a card number is displayed
+  currency-input: if true, transforms text to currency-friendly value. Eg, 2003894 => 2,003,894.00
+
+Pipes
+  sanitizer: bypasses ng HTML security string
