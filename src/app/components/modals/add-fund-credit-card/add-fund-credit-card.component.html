@@ -1,0 +1,42 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding">
+  
+  <div class="logo">
+    <ion-icon name="card-outline" color="success"></ion-icon>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let input of Inputs" [size]="input.fullWidth ? '12' : '6'">
+        <ion-item mode="md">
+          <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
+          <ion-input [appCardNumberInput]="input.directive == 'card-number'"
+          [appCardExpiryDateInput]="input.directive == 'card-expiry-date'"
+          [appCurrencyInput]="input.directive == 'currency'"
+          [type]="input.type"
+          [value]="input.value"
+          [inputmode]="input.inputMode"
+          [(ngModel)]="input.model"
+          (ngModelChange)="input.modelChanged()"
+          (ionBlur)="input.inputBlur()"
+          [placeholder]="input.placeholder"
+          [maxlength]="input.maxLength"
+          ></ion-input>
+        </ion-item>
+    
+        <ion-text [color]="input.detail.detailTextColor ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+          {{ input.detail.detailText }}
+        </p></ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br><br><br>
+
+  <ion-button [disabled]="!IsValid" class="outline"
+      (click)="fund()" size="large" shape="round" expand="block" fill="outline">
+      <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+      <ion-text *ngIf="!IsProcessing">{{ FundBtnText }}</ion-text>
+  </ion-button>
+</ion-content>

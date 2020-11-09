@@ -1,0 +1,54 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()" ></app-modal-header>
+
+<ion-content class="ion-padding">
+
+  <div class="logo">
+    <ion-icon name="swap-vertical-outline" color="success"></ion-icon>
+  </div>
+
+  <div class="input" *ngFor="let input of Inputs">
+
+    <ion-item mode="md">
+      <ion-label class="input-label" [position]="input.labelPosition ? input.labelPosition : 'floating'">{{ input.label }}</ion-label>
+      
+      <ion-input *ngIf="!input.isSelect"
+      [type]="input.type"
+      [value]="input.value"
+      [inputmode]="input.inputMode"
+      [appCurrencyInput]="input.directive == 'currency'"
+      [(ngModel)]="input.model"
+      (ngModelChange)="input.modelChanged()"
+      (ionBlur)="input?.inputBlur()"
+      [readonly]="input.readonly"
+      ></ion-input>
+
+      <ion-select *ngIf="input.isSelect" class="select" 
+      [placeholder]="input.placeholder" [(ngModel)]="input.model"
+      (ionChange)="input.modelChanged()"
+      (ionBlur)="input.inputBlur()"
+      [interfaceOptions]="{ cssClass : 'alert-wide'}"
+      >
+      <ion-select-option *ngFor="let option of input.selectOptions"
+        [value]="option.value">
+        {{ option.text }}
+      </ion-select-option>
+    </ion-select>
+    
+    </ion-item>
+
+    <ion-text [color]="input.detail ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+      {{ input.detail?.detailText }}
+    </p></ion-text>
+  </div>
+
+  <br><br><br>
+
+  <div class="btn ion-padding">
+    <ion-button [disabled]="!IsValid" class="outline"
+      (click)="pay()" size="large" shape="round" expand="block" fill="outline">
+      <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+      <ion-text *ngIf="!IsProcessing">{{ TransferBtnText }}</ion-text>
+    </ion-button>
+  </div>
+  
+</ion-content>

@@ -19,7 +19,17 @@ import { BuyAirtimeComponent } from './modals/buy-airtime/buy-airtime.component'
 import { SetPinComponent } from './modals/set-pin/set-pin.component';
 import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 import { PayBillsComponent } from './modals/pay-bills/pay-bills.component';
-
+import { ReferralDetailsComponent } from './modals/referral-details/referral-details.component';
+import { ReferralsComponent } from './modals/referrals/referrals.component';
+import { CurrencyTypeComponent } from './currency-type/currency-type.component';
+import { BuyCurrencyComponent } from './modals/buy-currency/buy-currency.component';
+import { SellCurrencyComponent } from './modals/sell-currency/sell-currency.component';
+import { BankTransferComponent } from './modals/bank-transfer/bank-transfer.component';
+import { BeaconTransferComponent } from './modals/beacon-transfer/beacon-transfer.component';
+import { AddFundCreditCardComponent } from './modals/add-fund-credit-card/add-fund-credit-card.component';
+import { AddFundTransferComponent } from './modals/add-fund-transfer/add-fund-transfer.component';
+import { SharedDirectivesModule } from '../directives/shared-directives.module';
+import { SharedPipesModule } from '../pipes/shared-pipes.module';
 
 
 @NgModule({
@@ -39,6 +49,15 @@ import { PayBillsComponent } from './modals/pay-bills/pay-bills.component';
     ForgotPasswordComponent,
     VerifyAccountComponent,
     PayBillsComponent,
+    ReferralsComponent,
+    ReferralDetailsComponent,
+    CurrencyTypeComponent,
+    BuyCurrencyComponent,
+    SellCurrencyComponent,
+    BankTransferComponent,
+    BeaconTransferComponent,
+    AddFundCreditCardComponent,
+    AddFundTransferComponent,
   ],
   exports: [
     CardCircleComponent,
@@ -56,12 +75,23 @@ import { PayBillsComponent } from './modals/pay-bills/pay-bills.component';
     VerifyAccountComponent,
     PayBillsComponent,
     ResetPinComponent,
+    ReferralsComponent,
+    ReferralDetailsComponent,
+    BankTransferComponent,
+    BeaconTransferComponent,
+    CurrencyTypeComponent,
+    BuyCurrencyComponent,
+    SellCurrencyComponent,
+    AddFundCreditCardComponent,
+    AddFundTransferComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
     FormsModule,
+    SharedPipesModule,
+    SharedDirectivesModule,
   ]
 })
 export class ComponentsModule { }

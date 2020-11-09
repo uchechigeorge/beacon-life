@@ -48,11 +48,13 @@ export class BuyAirtimeComponent implements OnInit {
   ]
 
   public Inputs: IInputType[] = [
+    // Amount
     {
       id: InputID.Amount,
       model: this.NetworkModel,
       label: 'Amount',
-      type: 'number',
+      type: 'text',
+      directive: 'currency',
       inputMode: 'numeric',
       detail: {
         detailText: '',
@@ -73,6 +75,7 @@ export class BuyAirtimeComponent implements OnInit {
         }
       },
     },
+    // Phone Number
     {
       id: InputID.PhoneNumber,
       model: this.PhoneNumberModel,

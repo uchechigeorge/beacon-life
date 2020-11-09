@@ -1,0 +1,92 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding-top ion-padding-bottom ion-text-center">
+
+  <div class="logo">
+    <ion-icon name="logo-usd" color="success"></ion-icon>
+  </div>
+
+  <ion-text class="info"><p>
+    {{ InfoText }}
+  </p></ion-text>
+
+  <br>
+
+  <div class="ion-padding">
+    <div class="input" *ngFor="let input of Inputs">
+
+      <ion-item mode="md">
+        <ion-label class="input-label" [position]="input.labelPosition ? input.labelPosition : 'floating'">{{ input.label }}</ion-label>
+        
+        <ion-input *ngIf="!input.isSelect"
+        [type]="input.type"
+        [value]="input.value"
+        [inputmode]="input.inputMode"
+        [appCurrencyInput]="input.directive == 'currency'"
+        [(ngModel)]="input.model"
+        (ngModelChange)="input.modelChanged()"
+        (ionBlur)="input?.inputBlur()"
+        [readonly]="input.readonly"
+        ></ion-input>
+
+        <ion-select *ngIf="input.isSelect" class="select" 
+        [placeholder]="input.placeholder" [(ngModel)]="input.model"
+        (ionChange)="input.modelChanged()"
+        (ionBlur)="input.inputBlur()"
+        [interfaceOptions]="{ cssClass : 'alert-wide'}"
+        >
+        <ion-select-option *ngFor="let option of input.selectOptions"
+          [value]="option.value">
+          {{ option.text }}
+        </ion-select-option>
+      </ion-select>
+      
+      </ion-item>
+
+      <ion-text [color]="input.detail ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+        {{ input.detail?.detailText }}
+      </p></ion-text>
+    </div>
+  </div>
+
+
+
+  <div class="account-details" >
+
+    <ion-text class="info"><p>
+      {{ AccountDetailsInfo }}
+    </p></ion-text>
+
+    <ion-item *ngFor="let acc of AccountDetails">
+      <ion-icon [md]="acc.icon + '-sharp'" [ios]="acc.icon + '-outline'"></ion-icon>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="label">{{ acc.title }}</ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-note>{{ acc.subtitle }}</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-buttons slot="end" *ngIf="acc.showSecondaryIcon">
+        <ion-button class="clear" fill="clear" size="large" shape="round" (click)="copyAccNumber()">
+          <ion-icon [name]="acc.secondaryIcon + '-outline'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    
+  </div>
+
+  <br><br><br>
+
+  <div class="btn ion-padding">
+    <ion-button [disabled]="!IsValid" class="outline"
+      (click)="placeOrder()" size="large" shape="round" expand="block" fill="outline">
+      <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+      <ion-text *ngIf="!IsProcessing">{{ OrderBtnText }}</ion-text>
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -11,7 +11,7 @@
   <div class="input">
 
     <ion-item>
-      <ion-label class="label">{{ NetworkLabel }}</ion-label>
+      <ion-label position="floating" class="label">{{ NetworkLabel }}</ion-label>
       <ion-select class="select" [placeholder]="NetworkPlaceholder"
         (ionBlur)="bankInputBlur()"
         (ionChange)="bankInputChange()" [(ngModel)]="NetworkModel">
@@ -31,6 +31,7 @@
     <ion-item mode="md">
       <ion-label class="input-label" position="floating">{{ input.label }}</ion-label>
       <ion-input [class.password-dot]="!input.passwordVisible"
+      [appCurrencyInput]="input.directive == 'currency'"
       [type]="input.type"
       [value]="input.value"
       [inputmode]="input.inputMode"

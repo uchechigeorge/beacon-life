@@ -10,6 +10,16 @@ export const profilePhotoModalID = 'profile-photo-modal';
 export const accountStatementModalID = 'account-statement-modal';
 export const forgotPasswordModalID = 'forgot-password-modal';
 export const payBillsModalID = 'pay-bills-modal';
+export const referralsModalID = 'referrals-modal';
+export const referralDetailsModalID = 'referral-details-modal';
+export const buyCurrencyModalID = 'buy-currency-modal';
+export const sellCurrencyModalID = 'sell-currency-modal';
+export const exchangeCurrencyAlertID = 'exchange-currency-alert';
+export const beaconTransferModalID = 'beacon-tranfer-model';
+export const bankTransferModalID = 'bank-tranfer-model';
+export const transferAlertID = 'tranfer-alert';
+export const addFundTransferModalID = 'add-fund-transfer-modal';
+export const addFundCreditCardModalID = 'credit-card-fund-transfer-modal';
 
 
 export const fundCardAlertID = 'fund-card-alert';

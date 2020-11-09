@@ -131,12 +131,18 @@
       color: var(--ion-color-success);
       font-size: 17px;
     }
+
+    
   }
 
   ion-item ion-label{
     font-size: 20px;
   }
 
+
+  .alert-wide{
+    --width: 280px;
+  }
   
 .ion-color-darker {
   --ion-color-base: var(--ion-color-darker);

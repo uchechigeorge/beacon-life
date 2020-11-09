@@ -1,25 +1,5 @@
-export enum InputID{
-  SignUpEmail,
-  SignUpPassword,
-  SignUpConfirmPassword,
-  ReferralCode,
-  SignInEmail,
-  SignInPassword,
-  USSDTransferBank,
-  USSDTransferAmount,
-  CreditCardTransferAmount,
-  BitcoinTransferAmount,
-}
-export enum EditInputID{
-  FirstName, 
-  LastName,
-  StreetAddress,
-  City,
-  PhoneNumber,
-}
-
 export interface IEditInput{
-  id: EditInputID,
+  id: any,
   model: string,
   value?: string,
   type?: string,
@@ -49,6 +29,16 @@ export const emptyFieldErrorText = '*Fill out this field';
 export const noValueSelectedErrorText = '*Select a value';
 
 export const invalidEmailErrorText = '*Provide a valid email';
+
+export const invalidAccountNumberErrorText = '*Provide a valid account number';
+
+export const invalidAmountErrorText = '*Provide a valid amount';
+
+export const invalidNumberErrorText = '*Provide a valid number';
+
+export const invalidInputErrorText = '*Provide a valid value';
+
+export const invalidCardNumberErrorText = '*Provide a valid card number';
 
 export const weakPasswordLength = (minLength?: number, maxLength?: number) => {
   if(!minLength) minLength = 5;

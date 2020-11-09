@@ -8,7 +8,7 @@ import { SessionLoginComponent } from 'src/app/components/modals/session-login/s
 import { SetPinComponent } from 'src/app/components/modals/set-pin/set-pin.component';
 import { IInputType } from 'src/app/models/app-pages-model';
 import { forgotPasswordModalID, sessionsLoginModalID, setPinModalID } from 'src/app/models/component-id';
-import { confirmPasswordMismatch, emptyFieldErrorText, InputID, 
+import { confirmPasswordMismatch, emptyFieldErrorText, 
   invalidEmailErrorText, optionalField, weakPasswordLength } from 'src/app/models/input-models';
 import { signInRoute } from 'src/app/models/route-models';
 import { InputValidation } from './validation';
@@ -473,4 +473,13 @@ export class UserAuthPage implements OnInit, AfterViewInit {
 
     return await modal.present();
   }
+}
+
+enum InputID {
+  SignUpEmail,
+  SignUpPassword,
+  SignUpConfirmPassword,
+  ReferralCode,
+  SignInEmail,
+  SignInPassword
 }

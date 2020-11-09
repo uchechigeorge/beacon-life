@@ -3,8 +3,7 @@
  * Helper class for validating user input
  */
 export class InputValidation {
-  public IsNullOrEmpty(...values) {
-    // if(!values) return;
+  public IsNullOrEmpty(...values: string[]) {
     let result = values.some((v) => {
       return v.trim() === '' || v === null;
     });
@@ -52,4 +51,29 @@ export class InputValidation {
     }
   }
 
+  public IsNumber(...values: string[]): boolean {
+    let result = values.some(text => {
+      return !isNaN(parseFloat(text));
+    })
+
+    return result;
+  }
+
+  public IsValidAmount(...values: string[]): boolean {
+    let result = values.some(text => {
+      let number = parseFloat(text);
+
+      return number > 0;
+    })
+
+    return result;
+  }
+
+  public RemoveWhiteSpace(value: string): string {
+    return value.replace(/\s/g, '');
+  }
+
+  public MatchRegEx(regEx: RegExp, value: string): boolean {
+    return regEx.test(value);
+  }
 }

@@ -1,0 +1,64 @@
+<app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
+
+<ion-content class="ion-padding ion-text-center">
+
+  <div class="logo">
+    <ion-icon name="logo-usd" color="success"></ion-icon>
+  </div>
+
+  <ion-text class="info"><p>
+    {{ InfoText }}
+  </p></ion-text>
+
+  <br>
+
+  <div class="input" *ngFor="let input of Inputs">
+
+    <ion-item mode="md">
+      <ion-label class="input-label" [position]="input.labelPosition ? input.labelPosition : 'floating'">{{ input.label }}</ion-label>
+      
+      <ion-input *ngIf="!input.isSelect"
+      [type]="input.type"
+      [value]="input.value"
+      [inputmode]="input.inputMode"
+      [appCurrencyInput]="input.directive == 'currency'"
+      [(ngModel)]="input.model"
+      (ngModelChange)="input.modelChanged()"
+      (ionBlur)="input?.inputBlur()"
+      [readonly]="input.readonly"
+      ></ion-input>
+
+      <ion-select *ngIf="input.isSelect" class="select"
+      [placeholder]="input.placeholder" [(ngModel)]="input.model"
+      (ionChange)="input.modelChanged()"
+      (ionBlur)="input.inputBlur()"
+      [interfaceOptions]="{ cssClass : 'alert-wide'}"
+      >
+      <ion-select-option *ngFor="let option of input.selectOptions"
+        [value]="option.value">
+        {{ option.text }}
+      </ion-select-option>
+    </ion-select>
+
+      <ion-buttons *ngIf="input.isPassword" slot="end">
+        <ion-button [attr.tabindex]="-1" (click)="input.togglePasswordVisibility()">
+          <ion-icon color="medium" slot="icon-only"
+          [name]="input.passwordIcon + '-sharp'"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-text [color]="input.detail ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+      {{ input.detail?.detailText }}
+    </p></ion-text>
+  </div>
+
+  <br><br><br>
+
+  <ion-button [disabled]="!IsValid" class="outline"
+    (click)="placeOrder()" size="large" shape="round" expand="block" fill="outline">
+    <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+    <ion-text *ngIf="!IsProcessing">{{ OrderBtnText }}</ion-text>
+  </ion-button>
+
+</ion-content>

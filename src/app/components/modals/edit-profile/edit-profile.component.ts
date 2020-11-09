@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { editProfileModalID, profilePhotoActionSheetID, profilePhotoModalID } from 'src/app/models/component-id';
-import { EditInputID, IEditInput } from 'src/app/models/input-models';
+import { IEditInput } from 'src/app/models/input-models';
 import { ProfilePictureComponent } from '../profile-picture/profile-picture.component';
 import { profilePicActionSheetOptions } from './helper';
 
@@ -157,5 +157,18 @@ export class EditProfileComponent implements OnInit {
       })
   }
 
+  test = () => {
+    console.log('hit');
+  }
+
   wait = (ms) => new Promise<any>(resolve => setTimeout(resolve, ms));
+}
+
+
+export enum EditInputID{
+  FirstName, 
+  LastName,
+  StreetAddress,
+  City,
+  PhoneNumber,
 }

@@ -23,11 +23,11 @@ export const profilePicActionSheetOptions = (deleteFunction?: actionSheetHandler
         text: 'Choose from Gallery',
         cssClass: 'profile-action-sheet-button',
         handler: () => {
-          if(galleryFunction)
+          if(galleryFunction){
             galleryFunction();
+          }
           else 
             console.log('Gallery clicked');
-
         }
       },
       {
