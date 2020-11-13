@@ -1,22 +1,37 @@
 import { Pipe, PipeTransform, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CurrencyOptions } from '../models/app-pages-model';
 
 @Pipe({
   name: 'customCurrency'
 })
 export class CustomCurrencyPipe implements PipeTransform {
 
-  constructor(private sanitizer: DomSanitizer){ }
+  constructor() {}
 
 
-  transform(value: string, ...args: unknown[]): SafeHtml {
-    // let currencyString = args[0] as string;
-    // // currencyString = `<span>23</span>`;
-    // let currency = this.sanitizer.bypassSecurityTrustHtml(currencyString);
-    // console.log(currencyString);
-    return this.sanitizer.bypassSecurityTrustHtml(value);
-
-    // return `${currency} ${value}`;
+  transform(value: string, currency?: Currency): string | SafeHtml {
+    let valueNo = parseFloat(value).toFixed(2);
+    value = valueNo.toString();
+    const currencyType = this.setCurrency(currency);
+    value = currencyType + value;
+    return value;
   }
 
+  private setCurrency(currency: Currency): string {
+    switch (currency) {
+      case 'dollar':
+        return CurrencyOptions.dollar.html;
+      case 'naira':
+        return CurrencyOptions.naira.html;
+      case 'euro':
+        return CurrencyOptions.euro.html;
+      case 'pound':
+        return CurrencyOptions.pound.html;
+      default:
+        return CurrencyOptions.naira.html;
+    }
+  } 
 }
+
+type Currency = 'dollar' | 'naira' | 'pound' | 'euro';

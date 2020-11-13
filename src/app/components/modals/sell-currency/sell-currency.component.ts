@@ -153,7 +153,7 @@ export class SellCurrencyComponent implements OnInit {
       labelPosition: 'stacked',
       type: 'text',
       directive: 'currency',
-      // readonly: true,
+      readonly: true,
       inputBlur: () => {
 
       },

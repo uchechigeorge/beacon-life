@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface IEditInput{
   id: any,
   model: string,
@@ -22,6 +25,15 @@ export interface PasswordStrengthOptions{
 export interface IDetailText{
   detailText: string,
   detailTextColor?: string,
+}
+
+
+export interface IInsertPinOptions{
+  header?: string,
+  text?: string,
+  sanitizeString?: boolean,
+  textHTML?: SafeHtml,
+  handler?: () => any | Promise<any> | Observable<any>
 }
 
 export const emptyFieldErrorText = '*Fill out this field';

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ComponentRef } from '@ionic/core';
+
+
 import { AddFundCreditCardComponent } from 'src/app/components/modals/add-fund-credit-card/add-fund-credit-card.component';
 import { AddFundTransferComponent } from 'src/app/components/modals/add-fund-transfer/add-fund-transfer.component';
-
 import { BankTransferComponent } from 'src/app/components/modals/bank-transfer/bank-transfer.component';
 import { BeaconTransferComponent } from 'src/app/components/modals/beacon-transfer/beacon-transfer.component';
 import { BuyAirtimeComponent } from 'src/app/components/modals/buy-airtime/buy-airtime.component';
@@ -11,8 +12,12 @@ import { BuyCurrencyComponent } from 'src/app/components/modals/buy-currency/buy
 import { PayBillsComponent } from 'src/app/components/modals/pay-bills/pay-bills.component';
 import { ReferralsComponent } from 'src/app/components/modals/referrals/referrals.component';
 import { SellCurrencyComponent } from 'src/app/components/modals/sell-currency/sell-currency.component';
-import { IHomePageOptions } from 'src/app/models/app-pages-model';
-import { addFundCreditCardModalID, addFundTransferModalID, bankTransferModalID, beaconTransferModalID, buyAirtimeModalID, buyCurrencyModalID, fundCardAlertID, payBillsModalID, referralsModalID, sellCurrencyModalID, transferAlertID } from 'src/app/models/component-id';
+import { IHomePageOptions, CurrencyOptions } from 'src/app/models/app-pages-model';
+import { addFundCreditCardModalID, addFundTransferModalID, bankTransferModalID, beaconTransferModalID, buyAirtimeModalID, buyCurrencyModalID, fundCardAlertID, insertPinInputID, payBillsModalID, referralsModalID, sellCurrencyModalID, transferAlertID } from 'src/app/models/component-id';
+import { InsertPinService } from 'src/app/services/insert-pin.service';
+import { SanitizerPipe } from 'src/app/pipes/sanitizer.pipe';
+import { CustomCurrencyPipe } from 'src/app/pipes/custom-currency.pipe';
+
 
 @Component({
   selector: 'app-home',
@@ -24,6 +29,9 @@ export class HomePage implements OnInit {
   constructor(
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
+    private insertPinService: InsertPinService,
+    private domSanitizer: SanitizerPipe,
+    private currencyPipe: CustomCurrencyPipe,
   ) { }
 
   public FundAccountText = 'Fund Account';
@@ -200,7 +208,14 @@ export class HomePage implements OnInit {
     return await alert.present();
   }
 
-
+  async insertPin() {
+    const amount = this.currencyPipe.transform('2000', 'naira');
+    let textHTML = this.domSanitizer.transform(`You are about to transfer ${amount} to 1209366943`);
+    this.insertPinService.present({
+      sanitizeString: true,
+      textHTML,
+    });
+    }
 }
 
 enum FundOptions{

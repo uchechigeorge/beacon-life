@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CardCircleComponent } from './svgs/card-circle/card-circle.component';
 import { TransactionCardComponent } from './transaction-card/transaction-card.component';
 import { EditProfileComponent } from './modals/edit-profile/edit-profile.component';
-import { EditProfileInputComponent } from './edit-profile-input/edit-profile-input.component';
+import { EditProfileInputComponent } from './inputs/edit-profile-input/edit-profile-input.component';
 import { ProfilePictureComponent } from './modals/profile-picture/profile-picture.component';
 import { ResetPasswordComponent } from './modals/reset-password/reset-password.component';
 import { ResetPinComponent } from './modals/reset-pin/reset-pin.component';
@@ -30,6 +30,7 @@ import { AddFundCreditCardComponent } from './modals/add-fund-credit-card/add-fu
 import { AddFundTransferComponent } from './modals/add-fund-transfer/add-fund-transfer.component';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { SharedPipesModule } from '../pipes/shared-pipes.module';
+import { InsertPinInputComponent } from './inputs/insert-pin-input/insert-pin-input.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { SharedPipesModule } from '../pipes/shared-pipes.module';
     BeaconTransferComponent,
     AddFundCreditCardComponent,
     AddFundTransferComponent,
+    InsertPinInputComponent,
   ],
   exports: [
     CardCircleComponent,
@@ -84,6 +86,7 @@ import { SharedPipesModule } from '../pipes/shared-pipes.module';
     SellCurrencyComponent,
     AddFundCreditCardComponent,
     AddFundTransferComponent,
+    InsertPinInputComponent,
   ],
   imports: [
     CommonModule,

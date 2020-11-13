@@ -2,8 +2,8 @@
   <ion-tab-bar slot="bottom">
 
     <ion-tab-button *ngFor="let page of AppPages"
-     [routerLink]="'/' + page.url"
-     [selected]="customRoute.PageType == page.pageType"
+      [routerLink]="'/' + page.url"
+      [selected]="customRoute.PageType == page.pageType"
     >
       <ion-icon [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
       <ion-label>{{ page.title }}</ion-label>
@@ -11,3 +11,5 @@
 
   </ion-tab-bar>
 </ion-tabs>
+
+<!-- [tab]="page.url" -->

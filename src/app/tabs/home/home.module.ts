@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { SanitizerPipe } from 'src/app/pipes/sanitizer.pipe';
+import { CustomCurrencyPipe } from 'src/app/pipes/custom-currency.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +17,10 @@ import { HomePage } from './home.page';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [
+    SanitizerPipe,
+    CustomCurrencyPipe,
+  ]
 })
 export class HomePageModule {}

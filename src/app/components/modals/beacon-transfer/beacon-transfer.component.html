@@ -32,7 +32,7 @@
 
   <div class="btn ion-padding">
     <ion-button [disabled]="!IsValid" class="outline"
-      (click)="pay()" size="large" shape="round" expand="block" fill="outline">
+      (click)="insertPin()" size="large" shape="round" expand="block" fill="outline">
       <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
       <ion-text *ngIf="!IsProcessing">{{ TransferBtnText }}</ion-text>
     </ion-button>

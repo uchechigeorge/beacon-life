@@ -143,15 +143,34 @@
   .alert-wide{
     --width: 280px;
   }
+
+  .insert-pin-popover{
+    --max-width: 500px;
+    --width: 100vw;
+
+    .popover-wrapper {
+      position: absolute;
+      height: 70vh;
+      bottom: 0;
+      width: 100%;
+      opacity: 1;
+    }
+
+    .popover-content{
+      width: 100%;
+      height: 100%;
+      max-height: none;
+    }
+  }
   
-.ion-color-darker {
-  --ion-color-base: var(--ion-color-darker);
-  --ion-color-base-rgb: var(--ion-color-darker-rgb);
-  --ion-color-contrast: var(--ion-color-darker-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-darker-contrast-rgb);
-  --ion-color-shade: var(--ion-color-darker-shade);
-  --ion-color-tint: var(--ion-color-darker-tint);
-}
+  .ion-color-darker {
+    --ion-color-base: var(--ion-color-darker);
+    --ion-color-base-rgb: var(--ion-color-darker-rgb);
+    --ion-color-contrast: var(--ion-color-darker-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-darker-contrast-rgb);
+    --ion-color-shade: var(--ion-color-darker-shade);
+    --ion-color-tint: var(--ion-color-darker-tint);
+  }
 
 }
 

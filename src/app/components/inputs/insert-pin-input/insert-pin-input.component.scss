@@ -1,0 +1,133 @@
+.container{
+  position: absolute;
+  padding: 0;
+  bottom: 0;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  margin: 0;
+
+  .inner-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .close{
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      width: 30px;
+      height: 30px;
+
+      ion-icon{
+        font-size: 40px;
+      }
+    }
+  }
+
+}
+
+.keyboard{
+  min-height: 50%;
+  max-height: 70%;
+}
+
+.content{
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  .title{
+    text-align: center;
+    p{
+      font-size: 17px;
+      font-family: 'Robo-Bold';
+    }
+  }
+
+  .info{
+    text-align: center;
+    p{
+      font-size: 22px;
+    } 
+  }
+}
+
+.keyboard-option{
+  height: 50px;
+  width: 100%;
+  border: 1px black solid;
+  text-align: center;
+}
+
+.btn{
+  height: 60px;
+  width: 60px;
+  margin: 0 auto;
+  --box-shadow: none;
+  .btn-text p{
+    font-size: 30px;
+  }
+}
+
+
+.input{
+  width: 20px;
+  height: 40px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0 10px;
+  
+
+  .dot-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dot{
+    background-color: black;
+    width: 8px;
+    height: 8px;
+    text-align: center;
+    border-radius: 100%;
+    margin: auto;
+    transform: translateY(300%);
+    opacity: 0;
+  }
+  
+  .dot-active{
+    animation: animate-dot 0.4s ease forwards; 
+  }
+
+}
+
+.pin-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes animate-dot{
+  100%{
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

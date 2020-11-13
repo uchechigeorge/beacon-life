@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="inner-container">
+
+    <div class="close">
+      <ion-buttons>
+        <ion-button class="icon" (click)="dismissSheet()">
+          <p>
+            <ion-icon slot="icon-only" color="dark" name="close-outline"></ion-icon>
+          </p>
+        </ion-button>
+      </ion-buttons>
+    </div>
+
+    <div class="content ion-padding">
+      <ion-text *ngIf="!data.sanitizeString" color="dark" class="title"><p>
+        {{ data?.header }}
+      </p></ion-text>
+      <ion-text *ngIf="data.sanitizeString" color="dark" class="title"><p [innerHTML]="data ? data?.textHTML : InfoText">
+      </p></ion-text>
+      <ion-text color="dark" class="info"><p>
+        {{ data?.text ? data?.text : InfoText }}
+      </p></ion-text>
+      
+
+      <div class="inputs">
+        <div class="input" *ngFor="let input of Inputs">
+          <div class="dot-container">
+            <div class="dot" [class.dot-active]="input.active"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="keyboard">
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let option of keyboardOptions" size="4" class="ion-text-center" [offset]="option.offset ? option.offset : '0'">
+            
+            <div *ngIf="!option.hasIcon">
+              <ion-button class="icon btn" shape="round" (click)="addNumber(option.text)">
+                <ion-text class="btn-text"><p>
+                  {{ option.text }}
+                </p></ion-text>
+              </ion-button>
+            </div>
+
+            <div *ngIf="option.hasIcon">
+              <ion-button class="icon btn" shape="round" (click)="removeNumber()">
+                <ion-text class="btn-text"><p>
+                  <ion-icon [name]="option.icon"></ion-icon>
+                </p></ion-text>
+              </ion-button>
+            </div>
+          
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</div>
+<div class="pin-backdrop" *ngIf="IsProcessing">
+  <ion-spinner name="crescent" ></ion-spinner>
+</div>
