@@ -10,9 +10,9 @@ export interface IEditInput{
   label?: string,
   hasHeader?: boolean,
   headerTitle?: string,
-  updateInput?: () => Promise<boolean>,
-  inputChange?: () => void,
-  inputBlur?: () => void,
+  updateInput?: () => Promise<boolean | void>,
+  inputChange?: (e?: any) => void,
+  inputBlur?: (e?: any) => void,
 }
 
 export interface PasswordStrengthOptions{

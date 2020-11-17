@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, ModalController } from '@ionic/angular';
-import { editProfileModalID, profilePhotoActionSheetID, profilePhotoModalID } from 'src/app/models/component-id';
+import { ActionSheetController, ModalController, LoadingController } from '@ionic/angular';
+import { editProfileModalID, profilePhotoActionSheetID, profilePhotoModalID, updatingCredentialLoaderID } from 'src/app/models/component-id';
 import { IEditInput } from 'src/app/models/input-models';
 import { ProfilePictureComponent } from '../profile-picture/profile-picture.component';
 import { profilePicActionSheetOptions } from './helper';
+import { InputValidation } from 'src/app/pages/user-auth/validation';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,6 +23,8 @@ export class EditProfileComponent implements OnInit {
 
   public AnimateProfile: boolean = false;
 
+  public Validation: InputValidation = new InputValidation();
+
   public EditInputs: IEditInput[] = [
     // First Name
     {
@@ -33,10 +36,17 @@ export class EditProfileComponent implements OnInit {
       hasHeader: true,
       headerTitle: 'Full Name',
       updateInput: async () => {
-        return true;
+        if(this.Validation.IsNullOrEmpty(this.FirstName)) return false;
+        this.showLoading('first name ...');
+        this.wait(3000)
+          .then(() => {
+            this.dismissLoader();
+            return false;
+          });
       },
-      inputChange: () => {
-        this.FirstName = this.getInput(EditInputID.FirstName).model;
+      inputChange: (e) => {
+        this.FirstName = e.model;
+        console.log(e.model);
       },
       inputBlur: () => {
 
@@ -119,6 +129,7 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
+    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {}
@@ -126,6 +137,7 @@ export class EditProfileComponent implements OnInit {
   dismissModal() {
     this.modalCtrl.dismiss('', '', editProfileModalID);
   }
+
 
   getInput(id: EditInputID) {
     let input = this.EditInputs.find((input) => {
@@ -154,14 +166,27 @@ export class EditProfileComponent implements OnInit {
       .then(async () => {
         this.AnimateProfile = false;
         return await modal.present();
-      })
+      });
   }
 
-  test = () => {
-    console.log('hit');
+  async showLoading(message?: string) {
+    if(!message) message = 'Updating credentials';
+    else message = `Updating ${message}`;
+
+    const loader = await this.loadingCtrl.create({
+      id: updatingCredentialLoaderID,
+      message,
+      spinner: 'crescent',
+    });
+
+    return await loader.present();
   }
 
-  wait = (ms) => new Promise<any>(resolve => setTimeout(resolve, ms));
+  dismissLoader() {
+    this.loadingCtrl.dismiss('', '', updatingCredentialLoaderID);
+  }
+
+  wait = (ms: number) => new Promise<any>(resolve => setTimeout(resolve, ms));
 }
 
 

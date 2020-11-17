@@ -4,23 +4,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-text-center">
 
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let option of options" size="6">
-        <ion-card [color]="option.backGround" button 
-          (click)="option.handler()">
-          <ion-card-content>
-            <ion-icon [name]="option.icon"></ion-icon>
-            <ion-text class="content"><p>
-              {{ option.title }}
-            </p></ion-text>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="header ion-padding-top">
+    <ion-text><p>{{ HeaderGreeting }}</p></ion-text>
+    <div class="inner-header">
+      <div class="amount-info">
+        <ion-text><p class="amount-text">{{ AvailableBalanceLabel }}</p></ion-text>
+        <ion-text><p class="amount"><app-currency-type currency="naira" ></app-currency-type>{{ AvailableBalance | customCurrency : '' : true }}</p></ion-text>
+        
+        <div class="btn-container">
+          <ion-button (click)="fundAccount()">
+            {{ FundAccountText }}
+          </ion-button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <ion-card *ngFor="let option of options" color="custom-secondary" button class="card-options" 
+      (click)="option.handler()">
+      <ion-card-content>
+        <ion-icon [name]="option.icon"></ion-icon>
+
+        <ion-text class="content"><p>
+          {{ option.title }}
+        </p></ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
   <ion-card class="more-info-card" color="success" button (click)="insertPin()">
     <ion-card-content>
@@ -30,14 +43,17 @@
     </ion-card-content>
   </ion-card>
 
-  <br><br>
-  <ion-button size="large" fill="outline" shape="round" expand="block" class="outline" (click)="showReferrals()">
-    {{ StartEarningText }}
-  </ion-button>
-
   <br>
+  <div class="btns ion-padding">
 
-  <ion-button size="large" fill="outline" shape="round" expand="block" class="outline" (click)="showCurrencyExchange()">
-    {{ CurrencyExText }}
-  </ion-button>
+    <ion-button size="large" expand="block" (click)="showReferrals()">
+      {{ StartEarningText }}
+    </ion-button>
+
+    <br>
+    
+    <ion-button size="large" fill="outline" expand="block" class="outline" (click)="showCurrencyExchange()">
+      {{ CurrencyExText }}
+    </ion-button>
+  </div>
 </ion-content>

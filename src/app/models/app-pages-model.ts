@@ -18,12 +18,17 @@ export interface IHomePageOptions{
 
 export interface IListDetailsOptions{
   title: string,
+  id?: any,
   subtitle?: string,
+  button?: boolean,
   icon?: string,
   iconSrc?: string,
+  hasHeader?: boolean,
+  toggle?: boolean,
+  header?: string,
   showSecondaryIcon?: boolean,
   secondaryIcon?: string,
-  handler?: () => void
+  handler?: () => void,
 }
 
 export interface ITransactionCard{

@@ -1,3 +1,19 @@
+.slides{
+  height: auto;
+  position: relative;
+  width: 100%;
+
+  .slide{
+    position: absolute;
+    width: 100%;
+  }
+}
+
+
+.warning-text p{
+  font-size: 15px;
+  text-align: left;
+}
 
 .logo{
   width: 150px;
@@ -22,4 +38,65 @@
 
 .title p{
   font-size: 20px;
+}
+
+.fade-out{
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+  // animation: fade-out 0.5s ease;
+}
+
+.fade-in {
+  display: block;
+  pointer-events: all;
+  animation: fade-in 0.5s ease;
+}
+
+@keyframes fade-in{
+  0%{
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes fade-out{
+  0%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100%{
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.account-verified{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .avatar{
+    text-align: center;
+      ion-avatar{
+        background-color: var(--ion-color-success);
+        margin: auto;
+        height: 100px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-icon{
+          font-size: 75px;
+        }
+      }
+  }
 }

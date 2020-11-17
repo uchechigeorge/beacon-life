@@ -46,15 +46,16 @@ export class EditProfileInputComponent implements OnInit {
       isValid
     });
 
-    if(isValid) {
-      this.canEdit = false;
-    }
-    else{
+    if(isValid == false) {
       this.input.setFocus();
       let elem = await this.input.getInputElement();
       elem.select();
       this.canEdit = true;
       this.model = this.prevValue;
+      this.onChange();
+    }
+    else{
+      this.canEdit = false;
     }
   }
 
@@ -66,12 +67,17 @@ export class EditProfileInputComponent implements OnInit {
     this.enterEditMode();
   }
 
-  onChange(e) {
-    this.onChangeEvent.emit(e);
+  onChange(e?: any) {
+    this.onChangeEvent.emit({
+      event: e,
+      model: this.model
+    });
   }
 
   onBlur(e) {
     this.onBlurEvent.emit(e);
   }
+
+  wait = (ms: number) => new Promise<any>(resolve => setTimeout(resolve, ms));
 
 }

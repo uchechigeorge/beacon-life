@@ -3,65 +3,32 @@
   height: auto;
   overflow-x: hidden;
   
-  .main-input-container{
-    margin-left: 41px;
+  ion-item{
+    display: flex;
+  }
+
+  ion-grid{
     width: 100%;
     height: 100%;
-    left: 0;
-    top: 0;
-
-    ion-input{
-      font-size: 20px;
-    }
+    padding-left: 5px;
   }
 
-  .input-item{
+  .icon-info{
     position: absolute;
-    border-bottom: 1px solid #cfd0d2;
-    width: 100%;
-    height: 60px;
-    top: 0;
+    top: 20px;
     left: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .labels{
-      margin-left: 30px;
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
-      flex-direction: column;
-      width: 80vw;
-      height: 100%;
-      padding: 5px 0;
-     
-      .edit-label{
-        font-size: 20px;
-        padding-top: 1px;
-      }
-
-      .top-label{
-        font-size: 12px;
-      }
-    }
-
-    ion-icon{
-      font-size: 28px;
-    }
-
-    .btn{
-      position: absolute;
-      right: 0px;
-    }
+    font-size: 28px;
   }
-}
 
-.no-edit{
-  opacity: 0;
-  pointer-events: none;
-}
+  ion-input{
+    font-size: 20px;
+  }
 
-.overlay-visible{
-  z-index: 10;
+  .btn-edit{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+  }
 }

@@ -10,10 +10,11 @@ export class CustomCurrencyPipe implements PipeTransform {
   constructor() {}
 
 
-  transform(value: string, currency?: Currency): string | SafeHtml {
+  transform(value: string, currency?: Currency, excludeSymbol?: boolean): string | SafeHtml {
     let valueNo = parseFloat(value).toFixed(2);
     value = valueNo.toString();
     const currencyType = this.setCurrency(currency);
+    if(excludeSymbol) return value;
     value = currencyType + value;
     return value;
   }

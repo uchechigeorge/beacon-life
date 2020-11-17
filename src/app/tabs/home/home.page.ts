@@ -13,7 +13,9 @@ import { PayBillsComponent } from 'src/app/components/modals/pay-bills/pay-bills
 import { ReferralsComponent } from 'src/app/components/modals/referrals/referrals.component';
 import { SellCurrencyComponent } from 'src/app/components/modals/sell-currency/sell-currency.component';
 import { IHomePageOptions, CurrencyOptions } from 'src/app/models/app-pages-model';
-import { addFundCreditCardModalID, addFundTransferModalID, bankTransferModalID, beaconTransferModalID, buyAirtimeModalID, buyCurrencyModalID, fundCardAlertID, insertPinInputID, payBillsModalID, referralsModalID, sellCurrencyModalID, transferAlertID } from 'src/app/models/component-id';
+import { addFundCreditCardModalID, addFundTransferModalID, bankTransferModalID, 
+  beaconTransferModalID, buyAirtimeModalID, buyCurrencyModalID, fundCardAlertID, 
+  insertPinInputID, payBillsModalID, referralsModalID, sellCurrencyModalID, transferAlertID } from 'src/app/models/component-id';
 import { InsertPinService } from 'src/app/services/insert-pin.service';
 import { SanitizerPipe } from 'src/app/pipes/sanitizer.pipe';
 import { CustomCurrencyPipe } from 'src/app/pipes/custom-currency.pipe';
@@ -43,51 +45,11 @@ export class HomePage implements OnInit {
   public CurrencyExText = 'Currency Exchange';
 
 
-  public options: IHomePageOptions[] = [
-    {
-      title: 'Fund Account',
-      icon: 'wallet',
-      backGround: 'success',
-      handler: async () => {
-        const alert = await this.alertCtrl.create({
-          header: 'Add Fund',
-          id: fundCardAlertID,
-          cssClass: 'alert-wide',
-          inputs: [
-            {
-              type: 'radio',
-              label: 'Via Transfer',
-              value: FundOptions.ViaTranfer,
-            },
-            {
-              type: 'radio',
-              label: 'Via Payment Gateway',
-              value: FundOptions.ViaGateway,
-            },
-          ],
-          buttons: [
-            {
-              text: 'Cancel',
-              role: 'cancel',
-            },
-            {
-              text: 'Ok',
-              handler: (e) => {
-                if(e ==  undefined) return false;
-                if(e == FundOptions.ViaTranfer) {
-                  this.showModalAsync(AddFundTransferComponent, addFundTransferModalID);
-                }
-                else if(e == FundOptions.ViaGateway){
-                  this.showModalAsync(AddFundCreditCardComponent, addFundCreditCardModalID);
-                }
-              },
-            }
-          ]
-        });
+  public HeaderGreeting: string = 'Good morning, Emmanuel';
+  public AvailableBalance: string = '10000';
+  public AvailableBalanceLabel: string = 'Available Balance';
 
-        return await alert.present();
-      }
-    },
+  public options: IHomePageOptions[] = [
     {
       title: 'Pay Bills',
       icon: 'cash',
@@ -215,7 +177,47 @@ export class HomePage implements OnInit {
       sanitizeString: true,
       textHTML,
     });
-    }
+  }
+
+  async fundAccount() {
+    const alert = await this.alertCtrl.create({
+      header: 'Add Fund',
+      id: fundCardAlertID,
+      cssClass: 'alert-wide',
+      inputs: [
+        {
+          type: 'radio',
+          label: 'Via Transfer',
+          value: FundOptions.ViaTranfer,
+        },
+        {
+          type: 'radio',
+          label: 'Via Payment Gateway',
+          value: FundOptions.ViaGateway,
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Ok',
+          handler: (e) => {
+            if(e ==  undefined) return false;
+            if(e == FundOptions.ViaTranfer) {
+              this.showModalAsync(AddFundTransferComponent, addFundTransferModalID);
+            }
+            else if(e == FundOptions.ViaGateway){
+              this.showModalAsync(AddFundCreditCardComponent, addFundCreditCardModalID);
+            }
+          },
+        }
+      ]
+    });
+
+    return await alert.present();
+  }
 }
 
 enum FundOptions{

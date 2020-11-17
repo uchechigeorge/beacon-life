@@ -54,7 +54,6 @@ export class InsertPinService {
     });
     const popoverElem = document.querySelector('.insert-pin-popover .popover-wrapper .popover-content') as HTMLIonAppElement;
 
-    
     await popover.present()
     .then(() => {
       popoverElem.style.top = '0';

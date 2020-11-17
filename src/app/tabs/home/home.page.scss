@@ -1,35 +1,100 @@
-ion-card{
-  height: 120px;
 
-  ion-card-content{
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+.header{
+  height: 30vh;
+  width: 100%;
+  margin: 0;
+  background-image: linear-gradient(100deg, var(--ion-color-custom-secondary), var(--ion-color-custom-primary));
+  text-align: center;
+  position: relative;
 
-    ion-icon{
-      font-size: 50px;
+  ion-text{
+    color: var(--ion-color-custom-secondary-contrast);
+    p{
+      margin: 0;
+
+    }
+  }
+
+  .inner-header{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgba(235, 235, 235, 0.35), rgba(235, 235, 235, 0.1));
+    box-shadow: 0px 10px 10px rgba($color: #000000, $alpha: 0.2), 0px 0px 50px rgba($color: #000000, $alpha: 0.2);
+    
+
+    .amount-info{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
 
-    .content p{
+    .amount-text{
       font-size: 15px;
-      text-align: center;
+    }
+    .amount{
+      font-size: 40px;
     }
 
+    .btn-container{
+      text-align: right;
+      align-self: flex-end;
+    }
   }
 }
 
-.more-info-card{
-  margin-top: 80px;
-  height: 200px;
+.grid{
+  width: 90%;
+  background-color: var(--ion-color-lighter);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.card-options{
+  height: 90px;
+  width: 90px;
 
   ion-card-content{
-    height: 200px;
+    height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
+
+    ion-icon{
+      font-size: 30px;
+    }
+    
+    .content p{
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+}
+
+.more-info-card{
+  margin-top: 20px;
+  height: 100px;
+
+  ion-card-content{
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/assets/imgs/beacon-ad1.png');
 
     .content p{
       font-size: 18px;
@@ -37,4 +102,3 @@ ion-card{
     }
   }
 }
-

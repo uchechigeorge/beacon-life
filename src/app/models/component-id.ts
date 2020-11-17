@@ -21,7 +21,8 @@ export const transferAlertID = 'tranfer-alert';
 export const addFundTransferModalID = 'add-fund-transfer-modal';
 export const addFundCreditCardModalID = 'credit-card-fund-transfer-modal';
 export const insertPinInputID = 'insert-pin-input';
-
-
 export const fundCardAlertID = 'fund-card-alert';
+export const updatingCredentialLoaderID = 'updating-credential-loader';
+
+
 

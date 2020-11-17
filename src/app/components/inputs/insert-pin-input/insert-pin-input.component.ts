@@ -137,6 +137,7 @@ export class InsertPinInputComponent implements OnInit {
   }
 
   invalidPinError() {
+    this.IsProcessing = false;
     this.showToast();
     this.reset();
   }

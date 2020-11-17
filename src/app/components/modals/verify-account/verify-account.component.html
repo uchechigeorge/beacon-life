@@ -1,34 +1,93 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding ion-text-center">
+<ion-content class="ion-padding ion-text-center" *ngIf="!AccountVerified">
   <div class="logo">
     <ion-icon name="finger-print-outline" color="success"></ion-icon>
   </div>
 
   <br><br>
 
-  <div class="form" *ngIf="!HasDetails">
+  <div class="slides">
+    <div class="slide" [class.fade-in]="PageState == 'proceed' && !FirstLoad" [class.fade-out]="PageState != 'proceed'">
+      <div class="input">
+        <ion-item>
+          <ion-label class="input-label" position="floating">{{ BVNLabel }}</ion-label>
+          <ion-input [(ngModel)]="BVNModel"
+            [type]="'number'"
+            (ionBlur)="proceedInputBlur('bvn')"
+            (ionChange)="proceedInputChange()"
+            ></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position='stacked'>Browse</ion-label>
-      <ion-input #input></ion-input>
-    </ion-item>
+        <ion-text class="warning-text" color="danger"><p>{{ BVNErrorMessage }}</p></ion-text>
+      </div>
+
+      <div class="input">
+        <ion-item>
+          <ion-label position="floating">{{ DOBLabel }}</ion-label>
+          <ion-datetime 
+            [pickerOptions]="{ cssClass: 'date-time' }"
+            [(ngModel)]="DOBModel"
+            (ionBlur)="proceedInputBlur('dob')"
+            (ionChange)="proceedInputChange()"
+          ></ion-datetime>
+        </ion-item>
+
+        <ion-text class="warning-text" color="danger"><p>{{ DOBErrorMessage }}</p></ion-text>
+      </div>
+
+      <br><br><br>
     
-    <br><br><br>
+      <ion-button [disabled]="!ProceedValid" class="outline" (click)="proceed()" fill="outline" size="large" shape="round" expand="block" >
+        <ion-text>{{ VerifyBtnText }}</ion-text>
+      </ion-button>
+    </div>
 
-    <ion-button class="outline" (click)="verify()" fill="outline" size="large" shape="round" expand="block" >
-      <ion-text>{{ input.value?.toString().trim() == '' ? UploadBtnText : VerifyBtnText}}</ion-text>
-    </ion-button>
+    <div class="slide" [class.fade-in]="PageState == 'upload'" [class.fade-out]="PageState != 'upload'">
+      <div class="form">
+
+        <div class="input">
+          <ion-item>
+            <ion-label position='stacked'>Browse</ion-label>
+            <ion-input 
+              type="file"
+              [(ngModel)]="BrowseIDModel" 
+              (ionBlur)="uploadInputBlur()"
+              (ionChange)="uploadInputChange()"
+               ></ion-input>
+          </ion-item>
+
+          <ion-text class="warning-text" color="danger"><p>{{ BrowseIDErrorMessage }}</p></ion-text>
+        </div>
+        
+        <br><br><br>
+    
+        <ion-button [disabled]="!UploadValid" class="outline" (click)="verify()" fill="outline" size="large" shape="round" expand="block" >
+          <ion-spinner *ngIf="IsUploading" name="crescent"></ion-spinner>
+          <ion-text *ngIf="!IsUploading">{{ UploadBtnText }}</ion-text>
+        </ion-button>
+      </div>
+    </div>
+    
+    <div class="slide" [class.fade-in]="PageState == 'verifying'" [class.fade-out]="PageState != 'verifying'">
+      <ion-text class="title"><p>{{ IsPending ? VerificationPendingTitle : VerificationRejectedTitle }}</p></ion-text>
+      
+      <ion-text class="content"><p>{{ IsPending ? VerificationPendingText : VerificationRejectedText }}</p></ion-text>
+      
+      <ion-button *ngIf="!IsPending" strong (click)="restartVerification()" shape="round" size="large"
+      size="dafault" fill="solid">{{ RestartVerifyBtnText }}</ion-button>
+    </div>
   </div>
-
-  <div class="details" *ngIf="HasDetails">
-    <ion-text class="title"><p>{{ IsPending ? VerificationPendingTitle : VerificationRejectedTitle }}</p></ion-text>
-
-    <ion-text class="content"><p>{{ IsPending ? VerificationPendingText : VerificationRejectedText }}</p></ion-text>
-
-    <ion-button *ngIf="!IsPending" strong (click)="restartVerification()" shape="round" size="large"
-    size="dafault" fill="solid">{{ RestartVerifyBtnText }}</ion-button>
-  </div>
-
-
 </ion-content>
+
+<ion-content class="ion-padding ion-text-center" *ngIf="AccountVerified">
+  <div class="account-verified">
+    <ion-text class="title"><p>{{ AccountVerifiedText }}</p></ion-text>
+    
+    <div  class="avatar">
+      <ion-avatar>
+        <ion-icon class="icon" color="light" name="checkmark-outline"></ion-icon>
+      </ion-avatar>
+    </div>
+  </div>
+  </ion-content>

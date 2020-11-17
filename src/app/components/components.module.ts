@@ -31,6 +31,7 @@ import { AddFundTransferComponent } from './modals/add-fund-transfer/add-fund-tr
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { SharedPipesModule } from '../pipes/shared-pipes.module';
 import { InsertPinInputComponent } from './inputs/insert-pin-input/insert-pin-input.component';
+import { CardOptionsComponent } from './card-options/card-options.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { InsertPinInputComponent } from './inputs/insert-pin-input/insert-pin-in
     CurrencyTypeComponent,
     BuyCurrencyComponent,
     SellCurrencyComponent,
+    CardOptionsComponent,
     BankTransferComponent,
     BeaconTransferComponent,
     AddFundCreditCardComponent,
@@ -73,6 +75,7 @@ import { InsertPinInputComponent } from './inputs/insert-pin-input/insert-pin-in
     SetPinComponent,
     ProfilePictureComponent,
     BuyAirtimeComponent,
+    CardOptionsComponent,
     ResetPasswordComponent,
     VerifyAccountComponent,
     PayBillsComponent,
