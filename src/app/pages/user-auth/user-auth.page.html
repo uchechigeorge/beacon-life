@@ -43,7 +43,7 @@
         <br><br>
 
         <ion-button [disabled]="HasSignUpErrors" [attr.tabindex]="OnSignUpPage ? null : -1"
-         (click)="signUp()" size="large" shape="round" expand="block" fill="outline" class="outline">
+         (click)="signUp()" size="large" expand="block">
           <ion-spinner *ngIf="IsSigningUp" name="crescent"></ion-spinner>
           <ion-text *ngIf="!IsSigningUp">{{ SignUpBtnText }}</ion-text>
         </ion-button>
@@ -82,10 +82,9 @@
             strong size="default" fill="clear" class="clear">{{ ForgotPasswordText }}</ion-button>
         </div>
 
-
         <br><br>
         <ion-button [disabled]="HasSignInErrors" [attr.tabindex]="OnSignUpPage ? -1 : null"
-          (click)="signIn()" size="large" shape="round" expand="block" fill="outline" class="outline">
+          (click)="signIn()" size="large" expand="block">
           <ion-spinner *ngIf="IsSigningIn" name="crescent"></ion-spinner>
           <ion-text *ngIf="!IsSigningIn">{{ SignInBtnText }}</ion-text>
         </ion-button>

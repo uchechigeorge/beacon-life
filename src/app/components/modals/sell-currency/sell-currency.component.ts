@@ -237,6 +237,7 @@ export class SellCurrencyComponent implements OnInit {
     this.wait(3000)
       .then(() => {
         this.IsProcessing = false;
+        this.IsValid = false;
         this.proceed();
       })
   }
@@ -288,10 +289,7 @@ export class SellCurrencyComponent implements OnInit {
         this.setModelText(InputID.Total, '');
         this.TotalModel = totalText;
       }
-      // console.log({quantity: this.QuantityModel, total: this.TotalModel});
     }
-
-
   }
 
   setRate(value: CurrencyRate) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+
 import { IInputType } from 'src/app/models/app-pages-model';
 import { buyAirtimeModalID } from 'src/app/models/component-id';
 import { emptyFieldErrorText, ISelectOptions } from 'src/app/models/input-models';
@@ -28,7 +29,7 @@ export class BuyAirtimeComponent implements OnInit {
 
   public Validation: InputValidation = new InputValidation();
 
-  public AvailableBanks: ISelectOptions[] = [
+  public AvailableNetworks: ISelectOptions[] = [
     {
       text: 'MTN',
       value: 'mtn'
@@ -48,6 +49,34 @@ export class BuyAirtimeComponent implements OnInit {
   ]
 
   public Inputs: IInputType[] = [
+    // Network
+    {
+      id: InputID.Network,
+      model: this.NetworkModel,
+      isSelect: true,
+      label: 'Network',
+      placeholder: 'Select a Network',
+      selectOptions: this.AvailableNetworks,
+      detail: {
+        detailText: '',
+        detailTextColor: 'danger'
+      },
+      inputBlur: () => {
+        let text = this.NetworkModel;
+        if(text == undefined) text = '';
+
+        if(this.Validation.IsNullOrEmpty(text)) {
+          this.setErrorText(InputID.Network, emptyFieldErrorText);
+        }
+        else {
+          this.setErrorText(InputID.Network);
+        }
+      },
+      modelChanged: () => {
+        this.NetworkModel = this.getInput(InputID.Network).model;
+        this.inputsChange();
+      },
+    },
     // Amount
     {
       id: InputID.Amount,
@@ -113,22 +142,6 @@ export class BuyAirtimeComponent implements OnInit {
     this.modalCtrl.dismiss('', '', buyAirtimeModalID);
   }
 
-  bankInputChange() {
-    console.log(this.NetworkModel);
-  }
-
-  bankInputBlur() {
-    let text = this.NetworkModel;
-    if(text == undefined) text = '';
-
-    if(this.Validation.IsNullOrEmpty(text)) {
-      this.BankErrorText = emptyFieldErrorText
-    }
-    else {
-      this.BankErrorText = '';
-    }
-  }
-
   getInput(id: InputID) {
     const input = this.Inputs.find(input => input.id == id);
 
@@ -168,11 +181,10 @@ export class BuyAirtimeComponent implements OnInit {
   }
 
   wait = (ms: number) => new Promise<any>(resolve => setTimeout(resolve, ms));
-
-
 }
 
 enum InputID{
+  Network,
   Amount,
   PhoneNumber
 }

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { signInRoute, signUpRoute } from './models/route-models';
+import { signInRoute, signUpRoute, completeSignUpRoute, sessionsLoginRoute } from './models/route-models';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: signUpRoute,
@@ -16,9 +18,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user-auth/user-auth.module').then( m => m.UserAuthPageModule)
   },
   {
+    path: completeSignUpRoute,
+    loadChildren: () => import('./pages/complete-signup/complete-signup.module').then( m => m.CompleteSignupPageModule),
+  },
+  {
+    path: sessionsLoginRoute,
+    loadChildren: () => import('./pages/sessions-login/sessions-login.module').then( m => m.SessionsLoginPageModule)
+  },
+  {
     path: '**',
     redirectTo: signUpRoute
-  }
+  },
   
 ];
 @NgModule({

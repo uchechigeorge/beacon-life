@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CardOptionsComponent } from './card-options.component';
+import { UploadImageComponent } from './upload-image.component';
 
-describe('CardOptionsComponent', () => {
-  let component: CardOptionsComponent;
-  let fixture: ComponentFixture<CardOptionsComponent>;
+describe('UploadImageComponent', () => {
+  let component: UploadImageComponent;
+  let fixture: ComponentFixture<UploadImageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardOptionsComponent ],
+      declarations: [ UploadImageComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CardOptionsComponent);
+    fixture = TestBed.createComponent(UploadImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -8,6 +8,7 @@
 
   <div class="header ion-padding-top">
     <ion-text><p>{{ HeaderGreeting }}</p></ion-text>
+
     <div class="inner-header">
       <div class="amount-info">
         <ion-text><p class="amount-text">{{ AvailableBalanceLabel }}</p></ion-text>
@@ -35,15 +36,12 @@
     </ion-card>
   </div>
 
-  <ion-card class="more-info-card" color="success" button (click)="insertPin()">
+   <ion-card  button (click)="insertPin()">
     <ion-card-content>
-      <ion-text class="content"><p>
-        {{ MoreInfoText }}
-      </p></ion-text>
+       <img src="/assets/imgs/beaconlifebank.gif" />
     </ion-card-content>
   </ion-card>
 
-  <br>
   <div class="btns ion-padding">
 
     <ion-button size="large" expand="block" (click)="showReferrals()">

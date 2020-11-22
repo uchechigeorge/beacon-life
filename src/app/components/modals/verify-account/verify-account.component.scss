@@ -1,7 +1,24 @@
+
+@mixin ripple-circle($size, $opacity: 0) {
+  position: absolute;
+  border-radius: 100%;
+  width: $size;
+  height: $size;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background-color: rgba(var(--ion-color-custom-primary-rgb), $opacity);
+
+  @if $opacity == 0 {
+    background-color: var(--ion-color-custom-secondary);
+  }
+  
+}
+
 .slides{
   height: auto;
   position: relative;
-  width: 100%;
+  width: 100%; 
 
   .slide{
     position: absolute;
@@ -44,7 +61,6 @@
   opacity: 0;
   pointer-events: none;
   display: none;
-  // animation: fade-out 0.5s ease;
 }
 
 .fade-in {
@@ -82,14 +98,30 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  position: relative;
+
+  .ripple{
+    position: relative;
+    margin-top: -30vh;
+
+    .first-ripple{
+      @include ripple-circle(700px, 0.3);
+    }
+
+    .second-ripple{
+      @include ripple-circle(500px, 0.2);
+    }
+
+    .third-ripple{
+      @include ripple-circle(300px, 0.2);
+    }
+  }
 
   .avatar{
     text-align: center;
+    z-index: 10;
       ion-avatar{
-        background-color: var(--ion-color-success);
-        margin: auto;
-        height: 100px;
-        width: 100px;
+        @include ripple-circle(100px);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -98,5 +130,18 @@
           font-size: 75px;
         }
       }
+  }
+
+  .title {
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 10;
+    p{
+      font-family: 'Robo-Light';
+      font-size: 35px;
+    }
   }
 }

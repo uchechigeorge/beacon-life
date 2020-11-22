@@ -46,10 +46,11 @@ export class HomePage implements OnInit {
 
 
   public HeaderGreeting: string = 'Good morning, Emmanuel';
-  public AvailableBalance: string = '10000';
+  public AvailableBalance: string = '50330.94';
   public AvailableBalanceLabel: string = 'Available Balance';
 
   public options: IHomePageOptions[] = [
+    // Pay Bills
     {
       title: 'Pay Bills',
       icon: 'cash',
@@ -58,6 +59,7 @@ export class HomePage implements OnInit {
         this.showModalAsync(PayBillsComponent, payBillsModalID);
       }
     },
+    // Transfer Money
     {
       title: 'Transfer Money',
       icon: 'swap-vertical',
@@ -102,6 +104,7 @@ export class HomePage implements OnInit {
         return await alert.present();
       }
     },
+    //  Buy Airtime
     {
       title: 'Buy Airtime',
       icon: 'call',

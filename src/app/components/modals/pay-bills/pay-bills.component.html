@@ -1,7 +1,8 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding-top ion-text-center">
+<ion-content class="ion-text-center">
 
+  <app-modal-content-header [title]="PageTitle" ></app-modal-content-header>
   <ion-text class="info"><p>
     {{ InfoText }}
   </p></ion-text>

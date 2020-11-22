@@ -16,6 +16,7 @@ import { CustomCurrencyPipe } from 'src/app/pipes/custom-currency.pipe';
 export class BeaconTransferComponent implements OnInit {
 
   public PageTitle: string = 'Transfer to Beacon Account';
+  public PageContentTitle: string = 'Transfer';
   public TransferBtnText: string = 'Pay';
 
   public AccountNumberModel: string = '';

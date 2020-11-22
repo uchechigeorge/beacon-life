@@ -12,8 +12,9 @@ import { emptyFieldErrorText } from 'src/app/models/input-models';
 export class VerifyAccountComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public PageTitle: string = 'Verify Account';
-  public VerifyTitle: string = 'Verify Identity';
+  public ProceedTitle: string = 'Verify Identity';
   public UploadTitle: string = 'Upload Valid ID';
+  public VerifyingTitle: string = 'Verifying';
 
   public VerifyBtnText: string = 'Proceed';
   public UploadBtnText: string = 'Upload';
@@ -43,7 +44,7 @@ export class VerifyAccountComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   public IsPending: boolean = false;
   public AccountVerified: boolean = false;
-  public AccountVerifiedText: string = 'This account has been verified';
+  public AccountVerifiedText: string = 'Account Verified';
   public PageState: IPageState = 'proceed';
   public FirstLoad: boolean = true;
   public ProceedValid: boolean = false;

@@ -1,14 +1,14 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding ion-text-center" *ngIf="!AccountVerified">
-  <div class="logo">
-    <ion-icon name="finger-print-outline" color="success"></ion-icon>
-  </div>
+<ion-content class="ion-text-center" *ngIf="!AccountVerified">
+  <app-modal-content-header *ngIf="PageState == 'proceed'" [title]="ProceedTitle" ></app-modal-content-header>
+  <app-modal-content-header *ngIf="PageState == 'upload'" [title]="UploadTitle" ></app-modal-content-header>
+  <app-modal-content-header *ngIf="PageState == 'verifying'" [title]="VerifyingTitle" ></app-modal-content-header>
 
   <br><br>
 
   <div class="slides">
-    <div class="slide" [class.fade-in]="PageState == 'proceed' && !FirstLoad" [class.fade-out]="PageState != 'proceed'">
+    <div class="ion-padding slide" [class.fade-in]="PageState == 'proceed' && !FirstLoad" [class.fade-out]="PageState != 'proceed'">
       <div class="input">
         <ion-item>
           <ion-label class="input-label" position="floating">{{ BVNLabel }}</ion-label>
@@ -38,12 +38,12 @@
 
       <br><br><br>
     
-      <ion-button [disabled]="!ProceedValid" class="outline" (click)="proceed()" fill="outline" size="large" shape="round" expand="block" >
+      <ion-button [disabled]="!ProceedValid" (click)="proceed()" size="large" expand="block" >
         <ion-text>{{ VerifyBtnText }}</ion-text>
       </ion-button>
     </div>
 
-    <div class="slide" [class.fade-in]="PageState == 'upload'" [class.fade-out]="PageState != 'upload'">
+    <div class="slide ion-padding" [class.fade-in]="PageState == 'upload'" [class.fade-out]="PageState != 'upload'">
       <div class="form">
 
         <div class="input">
@@ -51,7 +51,7 @@
             <ion-label position='stacked'>Browse</ion-label>
             <ion-input 
               type="file"
-              [(ngModel)]="BrowseIDModel" 
+              [(ngModel)]="BrowseIDModel"
               (ionBlur)="uploadInputBlur()"
               (ionChange)="uploadInputChange()"
                ></ion-input>
@@ -62,32 +62,43 @@
         
         <br><br><br>
     
-        <ion-button [disabled]="!UploadValid" class="outline" (click)="verify()" fill="outline" size="large" shape="round" expand="block" >
+        <ion-button [disabled]="!UploadValid" (click)="verify()" size="large" expand="block" >
           <ion-spinner *ngIf="IsUploading" name="crescent"></ion-spinner>
           <ion-text *ngIf="!IsUploading">{{ UploadBtnText }}</ion-text>
         </ion-button>
       </div>
     </div>
     
-    <div class="slide" [class.fade-in]="PageState == 'verifying'" [class.fade-out]="PageState != 'verifying'">
+    <div class="slide ion-padding" [class.fade-in]="PageState == 'verifying'" [class.fade-out]="PageState != 'verifying'">
       <ion-text class="title"><p>{{ IsPending ? VerificationPendingTitle : VerificationRejectedTitle }}</p></ion-text>
       
       <ion-text class="content"><p>{{ IsPending ? VerificationPendingText : VerificationRejectedText }}</p></ion-text>
-      
-      <ion-button *ngIf="!IsPending" strong (click)="restartVerification()" shape="round" size="large"
+     
+      <br>
+      <ion-button  *ngIf="!IsPending" strong (click)="restartVerification()"  size="large"
       size="dafault" fill="solid">{{ RestartVerifyBtnText }}</ion-button>
     </div>
   </div>
 </ion-content>
 
-<ion-content class="ion-padding ion-text-center" *ngIf="AccountVerified">
+<ion-content class="ion-text-center" *ngIf="AccountVerified">
+
   <div class="account-verified">
-    <ion-text class="title"><p>{{ AccountVerifiedText }}</p></ion-text>
+    <ion-text color="custom-secondary" class="title"><p>{{ AccountVerifiedText }}</p></ion-text>
     
-    <div  class="avatar">
-      <ion-avatar>
-        <ion-icon class="icon" color="light" name="checkmark-outline"></ion-icon>
-      </ion-avatar>
+    <div class="ripple">
+      <div class="first-ripple">
+        <div class="second-ripple">
+          <div class="third-ripple">
+            <div class="avatar">
+              <ion-avatar>
+                <ion-icon class="icon" color="light" name="checkmark-outline"></ion-icon>
+              </ion-avatar>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+   
   </div>
   </ion-content>

@@ -1,12 +1,11 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding">
+<ion-content class="">
 
-  <div class="logo">
-    <ion-icon color="success" name="keypad-outline"></ion-icon>
-  </div>
+  <app-modal-content-header [title]="PageTitle" ></app-modal-content-header>
 
-  <div class="reset-input" *ngIf="IsVerified">
+  <br><br><br>
+  <div class="reset-input ion-padding" *ngIf="IsVerified">
 
     <div class="input" *ngFor="let input of ResetInputs">
 
@@ -37,13 +36,13 @@
     <br><br>
 
     <ion-button [disabled]="!ConfirmValid"
-      (click)="confirm()" size="large" shape="round" expand="block" fill="outline" class="outline">
+      (click)="confirm()" size="large" expand="block">
       <ion-spinner *ngIf="IsConfirming" name="crescent"></ion-spinner>
       <ion-text *ngIf="!IsConfirming">{{ ConfirmBtnText }}</ion-text>
     </ion-button>
   </div>
 
-  <div class="input ion-text-center" *ngIf="!IsVerified">
+  <div class="input ion-text-center ion-padding" *ngIf="!IsVerified">
 
     <ion-item mode="md">
       <ion-label class="input-label" position="floating">{{ VerifyPinInput?.label }}</ion-label>
@@ -70,7 +69,7 @@
 
     <br><br>
     <ion-button [disabled]="!VerifyValid"
-      (click)="verify()" size="large" shape="round" expand="block" fill="outline" class="outline">
+      (click)="verify()" size="large" expand="block">
       <ion-spinner *ngIf="IsVerifying" name="crescent"></ion-spinner>
       <ion-text *ngIf="!IsVerifying">{{ VerifyBtnText }}</ion-text>
     </ion-button>

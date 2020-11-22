@@ -11,8 +11,7 @@ export class CustomCurrencyPipe implements PipeTransform {
 
 
   transform(value: string, currency?: Currency, excludeSymbol?: boolean): string | SafeHtml {
-    let valueNo = parseFloat(value).toFixed(2);
-    value = valueNo.toString();
+    value = this.addComma(value);
     const currencyType = this.setCurrency(currency);
     if(excludeSymbol) return value;
     value = currencyType + value;
@@ -33,6 +32,34 @@ export class CustomCurrencyPipe implements PipeTransform {
         return CurrencyOptions.naira.html;
     }
   } 
+
+  addComma(value?: string) {
+    let initValue = value;
+    initValue = initValue.replace(/,/g, '');
+    let initValueNo = parseFloat(initValue);
+    initValue = initValueNo.toFixed(2).toString();
+    let wholeNumber = initValue.replace(/\.[0-9]+/, '');
+    let decimalNumber = initValue.replace(wholeNumber, '');
+    let wholeNumberArray: string[] = wholeNumber.split('');
+    let decimalArray: string[] = decimalNumber.split('');
+    let wholeNoModifiedArray: string[] = [];
+
+    wholeNumberArray = wholeNumberArray.reverse();
+    wholeNumberArray.forEach((value, i) => {
+      if(isNaN(parseInt(value))) return;
+      wholeNoModifiedArray.push(value);
+        if((( i + 1 ) % 3 ) == 0) {
+        wholeNoModifiedArray.push(',');
+      }
+    });
+
+    wholeNoModifiedArray = wholeNoModifiedArray.reverse().concat(decimalArray);
+
+    initValue = wholeNoModifiedArray.join('');
+    initValue = initValue.replace(/^,/, '');
+
+    return initValue;
+  }
 }
 
 type Currency = 'dollar' | 'naira' | 'pound' | 'euro';

@@ -1,10 +1,10 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding-top ion-text-center">
+<ion-content class="ion-text-center">
 
-  <div class="logo">
-    <ion-icon name="mail-outline" color="success"></ion-icon>
-  </div>
+ <app-modal-content-header [title]="PageTitle" ></app-modal-content-header>
+
+ <br><br><br>
   
   <ion-item>
     <ion-icon md="text-sharp" ios="text-outline" ></ion-icon>
@@ -44,15 +44,17 @@
 
   <br><br><br>
 
-  <ion-button class="outline" fill="outline" shape="round" (click)="showDetails()">
-    {{ ReferralDetailsBtnText }}
-  </ion-button>
-
-  <br><br>
-
-  <ion-button class="outline" fill="outline" shape="round" (click)="requestEarnings()">
-    {{ RequestEarningBtnText }}
-  </ion-button>
+  <div class="ion-padding">
+    <ion-button size="large" expand="block" (click)="showDetails()">
+      {{ ReferralDetailsBtnText }}
+    </ion-button>
+    
+    <br><br>
+    
+    <ion-button class="outline" fill="outline" size="large" expand="block" (click)="requestEarnings()">
+      {{ RequestEarningBtnText }}
+    </ion-button>
+  </div>
     
 
 </ion-content>

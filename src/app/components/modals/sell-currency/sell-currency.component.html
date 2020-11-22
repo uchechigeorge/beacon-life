@@ -1,11 +1,10 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding-top ion-padding-bottom ion-text-center">
+<ion-content class="ion-text-center">
 
-  <div class="logo">
-    <ion-icon name="logo-usd" color="success"></ion-icon>
-  </div>
-
+  <app-modal-content-header [title]="PageTitle" ></app-modal-content-header>
+  
+  <br>
   <ion-text class="info"><p>
     {{ InfoText }}
   </p></ion-text>
@@ -51,7 +50,7 @@
 
 
 
-  <div class="account-details" >
+  <div class="account-details">
 
     <ion-text class="info"><p>
       {{ AccountDetailsInfo }}
@@ -79,11 +78,11 @@
     
   </div>
 
-  <br><br><br>
+  <br><br>
 
-  <div class="btn ion-padding">
-    <ion-button [disabled]="!IsValid" class="outline"
-      (click)="placeOrder()" size="large" shape="round" expand="block" fill="outline">
+  <div class="ion-padding">
+    <ion-button [disabled]="!IsValid"
+      (click)="placeOrder()" size="large" expand="block">
       <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
       <ion-text *ngIf="!IsProcessing">{{ OrderBtnText }}</ion-text>
     </ion-button>

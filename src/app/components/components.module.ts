@@ -16,7 +16,7 @@ import { VerifyAccountComponent } from './modals/verify-account/verify-account.c
 import { ModalHeaderComponent } from './modals/modal-header/modal-header.component';
 import { SessionLoginComponent } from './modals/session-login/session-login.component';
 import { BuyAirtimeComponent } from './modals/buy-airtime/buy-airtime.component';
-import { SetPinComponent } from './modals/set-pin/set-pin.component';
+import { SetPinComponent } from './signup/set-pin/set-pin.component';
 import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 import { PayBillsComponent } from './modals/pay-bills/pay-bills.component';
 import { ReferralDetailsComponent } from './modals/referral-details/referral-details.component';
@@ -31,7 +31,11 @@ import { AddFundTransferComponent } from './modals/add-fund-transfer/add-fund-tr
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { SharedPipesModule } from '../pipes/shared-pipes.module';
 import { InsertPinInputComponent } from './inputs/insert-pin-input/insert-pin-input.component';
-import { CardOptionsComponent } from './card-options/card-options.component';
+import { ModalContentHeaderComponent } from './modal-content-header/modal-content-header.component';
+import { SetProfileComponent } from './signup/set-profile/set-profile.component';
+import { UploadImageComponent } from './signup/upload-image/upload-image.component';
+import { VerifyEmailComponent } from './signup/verify-email/verify-email.component';
+import { VerifyPhoneNumberComponent } from './signup/verify-phone-number/verify-phone-number.component';
 
 
 @NgModule({
@@ -47,7 +51,6 @@ import { CardOptionsComponent } from './card-options/card-options.component';
     ResetPasswordComponent,
     SessionLoginComponent,
     ResetPinComponent,
-    SetPinComponent,
     ForgotPasswordComponent,
     VerifyAccountComponent,
     PayBillsComponent,
@@ -56,12 +59,17 @@ import { CardOptionsComponent } from './card-options/card-options.component';
     CurrencyTypeComponent,
     BuyCurrencyComponent,
     SellCurrencyComponent,
-    CardOptionsComponent,
     BankTransferComponent,
     BeaconTransferComponent,
     AddFundCreditCardComponent,
     AddFundTransferComponent,
+    ModalContentHeaderComponent,
     InsertPinInputComponent,
+    SetProfileComponent,
+    SetPinComponent,
+    UploadImageComponent,
+    VerifyEmailComponent,
+    VerifyPhoneNumberComponent,
   ],
   exports: [
     CardCircleComponent,
@@ -72,10 +80,8 @@ import { CardOptionsComponent } from './card-options/card-options.component';
     ForgotPasswordComponent,
     SessionLoginComponent,
     ModalHeaderComponent,
-    SetPinComponent,
     ProfilePictureComponent,
     BuyAirtimeComponent,
-    CardOptionsComponent,
     ResetPasswordComponent,
     VerifyAccountComponent,
     PayBillsComponent,
@@ -89,7 +95,13 @@ import { CardOptionsComponent } from './card-options/card-options.component';
     SellCurrencyComponent,
     AddFundCreditCardComponent,
     AddFundTransferComponent,
+    ModalContentHeaderComponent,
     InsertPinInputComponent,
+    SetProfileComponent,
+    SetPinComponent,
+    UploadImageComponent,
+    VerifyEmailComponent,
+    VerifyPhoneNumberComponent,
   ],
   imports: [
     CommonModule,

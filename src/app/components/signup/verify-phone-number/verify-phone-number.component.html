@@ -1,0 +1,38 @@
+<div class="ion-padding ion-text-center">
+
+  <br><br>
+  
+  <ion-text class="info"><p>
+    {{ InfoText }}
+  </p></ion-text>
+  
+  <br>
+
+  <div class="input">
+    <ion-item>
+      <ion-label class="input-label" position="floating">{{ PhoneNumberCodeLabelText }}</ion-label>
+      <ion-input
+        [(ngModel)]="PhoneNumberCodeModel"
+        [type]="'number'"
+        inputmode="numeric"
+        (ionBlur)="inputBlur()"
+        (ngModelChange)="inputChange()"
+        ></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" class="warning-text"><p>
+      {{ PhoneNumberCodeErrorText }}
+    </p></ion-text>
+  </div>
+
+  <br><br>
+
+  <ion-button [disabled]="!IsValid"
+    (click)="verify()" size="large" expand="block">
+    <ion-spinner *ngIf="IsSending" name="crescent"></ion-spinner>
+    <ion-text *ngIf="!IsSending">{{ VerifyBtnTxt }}</ion-text>
+  </ion-button>
+
+  <ion-button strong (click)="resend()" class="clear" [disabled]="!ResendValid"
+    size="dafault" fill="clear">{{ ResendValid ? ResendCodeBtnText : ResendCodeBtnText + ' in ' + CountDownTimer }}</ion-button>
+</div>

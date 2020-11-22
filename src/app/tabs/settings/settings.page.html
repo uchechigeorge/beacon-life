@@ -15,7 +15,7 @@
 
     <ion-item [button]="option.button"
       (click)="option.handler()">
-      <ion-icon [name]="option.icon"></ion-icon>
+      <ion-icon [name]="option.icon" color="custom-secondary"></ion-icon>
       <ion-grid>
         <ion-row>
           <ion-col size="12">
@@ -27,7 +27,7 @@
         </ion-row>
       </ion-grid>
 
-      <ion-toggle [(ngModel)]="PushNotificationEnabled" (ionChange)="option.handler('toggle')" *ngIf="option.toggle" color="success"></ion-toggle>
+      <ion-toggle [(ngModel)]="PushNotificationEnabled" (ionChange)="option.handler('toggle')" *ngIf="option.toggle" color="custom-secondary"></ion-toggle>
     </ion-item>
 
   </div>

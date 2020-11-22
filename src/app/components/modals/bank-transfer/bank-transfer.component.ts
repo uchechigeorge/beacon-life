@@ -13,6 +13,7 @@ import { InputValidation } from 'src/app/pages/user-auth/validation';
 export class BankTransferComponent implements OnInit {
 
   public PageTitle: string = 'Transfer to Other Bank Account';
+  public PageContentTitle: string = 'Transfer';
   public TransferBtnText: string = 'Pay';
 
   public BankModel: string = '';

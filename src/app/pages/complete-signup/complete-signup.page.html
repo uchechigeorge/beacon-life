@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>complete-signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides">
+    <ion-slides>
+      <ion-slide *ngIf="SetProfileValid">
+        <app-set-profile (complete)="setProfile()"></app-set-profile>
+      </ion-slide>
+      <ion-slide *ngIf="SetPinValid">
+        <app-set-pin (complete)="setPin()" ></app-set-pin>
+      </ion-slide>
+      <ion-slide *ngIf="UploadPictureValid">
+        <app-upload-image (complete)="uploadImage()" ></app-upload-image>
+      </ion-slide>
+      <ion-slide *ngIf="VerifyEmailValid">
+        <app-verify-email (complete)="verifyEmail()"></app-verify-email>
+      </ion-slide>
+      <ion-slide *ngIf="VerifyPhoneNoValid">
+        <app-verify-phone-number (complete)="verifyPhoneNumber()" ></app-verify-phone-number>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
+
+
+<!-- <ion-slide *ngIf="customRoute.ProgressType == 1 || customRoute.ProgressType == 10">
+  <app-set-profile (complete)="setProfile()"></app-set-profile>
+</ion-slide>
+<ion-slide *ngIf="customRoute.ProgressType == 2 || customRoute.ProgressType == 10">
+  <app-set-pin (complete)="setPin()" ></app-set-pin>
+</ion-slide>
+<ion-slide *ngIf="customRoute.ProgressType == 3 || customRoute.ProgressType == 10">
+  <app-upload-image (complete)="uploadImage()" ></app-upload-image>
+</ion-slide>
+<ion-slide *ngIf="customRoute.ProgressType == 4 || customRoute.ProgressType == 10">
+  <app-verify-email (complete)="verifyEmail()"></app-verify-email>
+</ion-slide>
+<ion-slide *ngIf="customRoute.ProgressType == 5 || customRoute.ProgressType == 10">
+  <app-verify-phone-number (complete)="verifyPhoneNumber()" ></app-verify-phone-number>
+</ion-slide> -->

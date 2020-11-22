@@ -1,10 +1,10 @@
 <app-modal-header [title]="PageTitle" (dismissEvent)="dismissModal()"></app-modal-header>
 
-<ion-content class="ion-padding">
+<ion-content class="">
   
-  <div class="logo">
-    <ion-icon name="card-outline" color="success"></ion-icon>
-  </div>
+  <app-modal-content-header [title]="PageContentTitle"></app-modal-content-header>
+
+  <br><br><br>
 
   <ion-grid>
     <ion-row>
@@ -34,9 +34,11 @@
 
   <br><br><br>
 
-  <ion-button [disabled]="!IsValid" class="outline"
-      (click)="fund()" size="large" shape="round" expand="block" fill="outline">
+  <div class="ion-padding">
+    <ion-button [disabled]="!IsValid"
+      (click)="fund()" size="large" expand="block">
       <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
       <ion-text *ngIf="!IsProcessing">{{ FundBtnText }}</ion-text>
-  </ion-button>
+    </ion-button>
+  </div>
 </ion-content>

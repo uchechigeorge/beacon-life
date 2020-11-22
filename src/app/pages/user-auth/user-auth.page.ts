@@ -1,17 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInput, IonSlides, ModalController } from '@ionic/angular';
+import { IonInput, IonSlides, ModalController, ToastController } from '@ionic/angular';
 import { ComponentRef } from "@ionic/core";
+import { Plugins } from "@capacitor/core";
 
 import { ForgotPasswordComponent } from 'src/app/components/modals/forgot-password/forgot-password.component';
 import { SessionLoginComponent } from 'src/app/components/modals/session-login/session-login.component';
-import { SetPinComponent } from 'src/app/components/modals/set-pin/set-pin.component';
 import { IInputType } from 'src/app/models/app-pages-model';
 import { forgotPasswordModalID, sessionsLoginModalID, setPinModalID } from 'src/app/models/component-id';
 import { confirmPasswordMismatch, emptyFieldErrorText, 
-  invalidEmailErrorText, optionalField, weakPasswordLength } from 'src/app/models/input-models';
-import { signInRoute } from 'src/app/models/route-models';
+  invalidEmailErrorText, optionalField, weakPasswordLength, duplicateCredential, internetConnectionError } from 'src/app/models/input-models';
+import { signInRoute, SignUpProgress, completeSignUpRoute, homeRoute } from 'src/app/models/route-models';
 import { InputValidation } from './validation';
+import { UserAuthService } from 'src/app/services/user-auth.service';
+import { CustomRouteService } from 'src/app/services/custom-route.service';
+import { IUserData, IUserDataApiResponse } from 'src/app/models/api-response-models';
+
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-user-auth',
@@ -227,6 +232,9 @@ export class UserAuthPage implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
+    private userAuth: UserAuthService,
+    private customRoute: CustomRouteService,
   ) {
   }
 
@@ -235,7 +243,7 @@ export class UserAuthPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     const route = this.router.url;
-    if(route == '/' + signInRoute){
+    if(route == '/' + signInRoute) {
       this.goToSignIn();
       this.OnSignUpPage = false;
     }
@@ -263,29 +271,53 @@ export class UserAuthPage implements OnInit, AfterViewInit {
     else{
       this.HasSignInErrors = true;
     }
-    
   }
 
   signUp() {
     
-    if(this.HasSignUpErrors) return;
+    if(this.HasSignUpErrors || this.IsSigningUp) return;
 
     this.IsSigningUp = true;
-    this.wait(3000)
-      .then(() => {
-        this.proceedSignUp();
+    this.userAuth.signup(this.SignUpEmailModel, this.SignUpPasswordModel, this.ReferralCodeModel)
+      .subscribe((res) => {
+        if(res.statuscode == 99) {
+          this.proceedSignUp(res.userdata);
+        }
+        else if(res.statuscode == 96) {
+          this.setErrorText(InputID.SignUpEmail, true, duplicateCredential('email'));
+        }
         this.IsSigningUp = false;
-      });
+      },
+      (err) => {
+        console.log(err);
+        this.checkInternetConnAlert();
+        this.IsSigningUp = false;
+      })
   }
 
-  proceedSignUp() {
-    this.showModalAsync(SetPinComponent, setPinModalID);
-    this.reset();
+  async proceedSignUp(data?: IUserData[]) {
+    console.log(data as IUserData[]);
+    await Storage.set({
+      key: 'userdata',
+      value: JSON.stringify(data)
+    });
+    this.customRoute.sendProgressEvent(SignUpProgress.SetProfile);
+    this.customRoute.setProgress(SignUpProgress.SetProfile)
+      .then(() => {
+        this.router.navigate([`${ completeSignUpRoute }`]);
+        this.reset();
+     });
   }
 
-  proceedSignIn() {
-    this.showModalAsync(SessionLoginComponent, sessionsLoginModalID);
+
+  async proceedSignIn(data?: IUserData[]) {
+    await Storage.set({
+      key: 'userdata',
+      value: JSON.stringify(data)
+    });
     this.reset();
+    this.router.navigate([`${ homeRoute }`]);
+    // this.showModalAsync(SessionLoginComponent, sessionsLoginModalID);
   }
 
   goToSignIn() {
@@ -300,12 +332,22 @@ export class UserAuthPage implements OnInit, AfterViewInit {
   }
 
   signIn() {
-    if(this.HasSignInErrors) return;
+    if(this.HasSignInErrors || this.IsSigningIn) return;
 
     this.IsSigningIn = true;
-    this.wait(3000)
-      .then(() => {
-        this.proceedSignIn();
+    console.log(this.SignInEmailModel, this.SignInPasswordModel)
+    this.userAuth.signin(this.SignInEmailModel, this.SignInPasswordModel)
+      .subscribe((res) => {
+        if(res.statuscode == 99) {
+          this.proceedSignIn(res.userdata);
+        }
+        else if(res.statuscode == 98) {
+          const input = this.getInput(InputID.SignInPassword, false);
+          input.detail.detailText = '*Invalid sign in credentials';
+        }
+        this.IsSigningIn = false;
+      }, (err) => {
+        this.checkInternetConnAlert();
         this.IsSigningIn = false;
       })
   }
@@ -328,6 +370,16 @@ export class UserAuthPage implements OnInit, AfterViewInit {
     });
 
     return await modal.present();
+  }
+
+  async checkInternetConnAlert() {
+    const toast = await this.toastCtrl.create({
+      message: internetConnectionError,
+      duration: 3000,
+      position: 'top',
+    });
+
+    return await toast.present();
   }
 
   reset(signUp?: boolean) {
@@ -379,7 +431,6 @@ export class UserAuthPage implements OnInit, AfterViewInit {
       return;
     }
 
-    console.log(input.passwordVisible);
     if(input.passwordVisible == true) {
       input.type = 'password';
       input.passwordIcon = 'eye';

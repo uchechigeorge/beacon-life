@@ -183,7 +183,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   verify() {
-    if(!this.VerifyValid) return;
+    if(!this.VerifyValid || this.IsVerifying) return;
 
     this.IsVerifying = true;
     
@@ -195,7 +195,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   confirm() {
-    if(!this.ConfirmValid) return;
+    if(!this.ConfirmValid || this.IsConfirming) return;
 
     this.IsConfirming = true;
 

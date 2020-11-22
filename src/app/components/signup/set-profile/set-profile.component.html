@@ -1,0 +1,29 @@
+<div class="ion-padding">
+
+  <div class="input" *ngFor="let input of Inputs">
+    <ion-item>
+      <ion-label position="floating" class="input-label">{{ input.label }}</ion-label>
+      <ion-input
+        [(ngModel)]="input.model"
+        [type]="input.type"
+        [inputmode]="input.inputMode"
+        (ionBlur)="input.inputBlur()"
+        (ngModelChange)="input.modelChanged()"
+        >
+
+      </ion-input>
+    </ion-item>
+
+    <ion-text [color]="input.detail.detailTextColor ? input.detail.detailTextColor : 'danger'" class="warning-text"><p>
+      {{ input.detail.detailText }}
+    </p></ion-text>
+  </div>
+
+  <br><br>
+
+  <ion-button [disabled]="!IsValid" size="large" (click)="set()" expand="block">
+    <ion-spinner *ngIf="IsProcessing" name="crescent"></ion-spinner>
+    <ion-text *ngIf="!IsProcessing">{{ SetProfileBtnText }}</ion-text>
+  </ion-button>
+
+</div>

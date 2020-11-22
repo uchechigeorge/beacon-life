@@ -23,6 +23,7 @@ export class AccountStatementComponent implements OnInit {
   public Validation: InputValidation = new InputValidation();
 
   public Inputs: IInputType[] = [
+    // Start Date
     {
       id: InputID.StartDate,
       model: this.StartDateModel,
@@ -46,6 +47,7 @@ export class AccountStatementComponent implements OnInit {
         this.inputsChange();
       }
     },
+    // End Date
     {
       id: InputID.EndDate,
       model: this.EndDateModel,
@@ -104,10 +106,14 @@ export class AccountStatementComponent implements OnInit {
   }
 
   downloadAccStatement() {
-    if(!this.IsValid) return;
+    if(!this.IsValid || this.IsDownloading) return;
+    this.IsDownloading = true;
 
-    this.showToast('Downloading in the background...', 3000);
-      
+    this.showToast('Downloading in the background...', 3000)
+    this.wait(3000)
+      .then(() => {
+        this.IsDownloading = false;
+      });
   }
 
   wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -118,8 +124,6 @@ export class AccountStatementComponent implements OnInit {
       duration,
       position: 'middle',
     });
-
-    
 
     return await toast.present();
   }  

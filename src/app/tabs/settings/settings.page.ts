@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentRef } from '@ionic/core'
 import { ModalController, isPlatform, AlertController } from '@ionic/angular';
+import { Plugins, StatusBarStyle } from "@capacitor/core";
 
 import { EditProfileComponent } from 'src/app/components/modals/edit-profile/edit-profile.component';
 import { IListDetailsOptions } from 'src/app/models/app-pages-model';
@@ -10,6 +11,7 @@ import { ResetPinComponent } from 'src/app/components/modals/reset-pin/reset-pin
 import { AccountStatementComponent } from 'src/app/components/modals/account-statement/account-statement.component';
 import { VerifyAccountComponent } from 'src/app/components/modals/verify-account/verify-account.component';
 
+const { Storage, StatusBar } = Plugins;
 
 @Component({
   selector: 'app-settings',
@@ -21,12 +23,13 @@ export class SettingsPage implements OnInit {
   public PushNotificationEnabled: boolean = false;
 
   public SettingsOptions: IListDetailsOptions[] = [
+    // Theme
     {
       title: 'Theme',
       id: ListItemID.Theme,
       subtitle: 'Light',
       hasHeader: true,
-      header: 'Preferances',
+      header: 'Preferences',
       icon: isPlatform('ios') ? 'sunny-outline' : 'sunny-sharp',
       button: true,
       handler: async () => {
@@ -70,6 +73,7 @@ export class SettingsPage implements OnInit {
         return await alert.present();
       }
     },
+    // Notifications
     {
       title: 'Push Notifications',
       id: ListItemID.Notifications,
@@ -92,6 +96,7 @@ export class SettingsPage implements OnInit {
         }
       },
     },
+    // Edit Profile
     {
       title: 'Edit Profile',
       subtitle: 'Edit your first name, phone number, etc',
@@ -103,6 +108,7 @@ export class SettingsPage implements OnInit {
         this.showModalAsync(EditProfileComponent, editProfileModalID);
       }
     },
+    // Verify Account
     {
       title: 'Verify Account',
       subtitle: 'Verify your account with us',
@@ -112,24 +118,27 @@ export class SettingsPage implements OnInit {
         this.showModalAsync(VerifyAccountComponent, verifyAccountModalID);
       }
     },
+    // Reset Password
     {
       title: 'Reset Password',
-      subtitle: 'Do you think your password is weak? Click me joor',
+      subtitle: 'Secure your account',
       button: true,
       icon: isPlatform('ios') ? 'key-outline' : 'key-sharp',
       handler: () => {
         this.showModalAsync(ResetPasswordComponent, resetPasswordModalID);
       }
     },
+    // Reset Pin
     {
       title: 'Reset Pin',
-      subtitle: 'Secure your card from Yahoo Boys',
+      subtitle: 'Secure your card',
       icon: isPlatform('ios') ? 'keypad-outline' : 'keypad-sharp',
       button: true,
       handler: () => {
         this.showModalAsync(ResetPinComponent, resetPinModalID);
       }
     },
+    // Account statement
     {
       title: 'Account Statement',
       subtitle: 'Review account state and transactions',
@@ -139,6 +148,7 @@ export class SettingsPage implements OnInit {
         this.showModalAsync(AccountStatementComponent, accountStatementModalID);
       }
     },
+    // Help
     {
       title: 'Help and Support',
       subtitle: 'Having an issue? Contact us. FAQs',
@@ -155,9 +165,12 @@ export class SettingsPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-  ) { }
+    ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const { value } = await Storage.get({ key: 'theme' });
+    this.Theme = value as IThemeType;
+    this.changeTheme(this.Theme);
   }
 
   async showModalAsync(component: ComponentRef, id?:string) {
@@ -176,6 +189,7 @@ export class SettingsPage implements OnInit {
 
   changeTheme(value?: IThemeType) {
     let listItem = this.getListItem(ListItemID.Theme);
+    
     switch (value) {
       case 'system-preference':
         listItem.subtitle = 'System Preference';
@@ -195,6 +209,55 @@ export class SettingsPage implements OnInit {
       default:
         break;
     }
+
+    Storage.set({
+      key: 'theme',
+      value: this.Theme
+    });
+    this.toggleTheme();
+  }
+
+
+  toggleTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if(this.Theme == 'light') {
+      this.setLight();
+    }
+    else if(this.Theme == 'dark') {
+      this.setDark();
+    }
+    else if(this.Theme == 'system-preference') {
+      if(prefersDark.matches) {
+        this.setDark();
+      }
+      else {
+        this.setLight();
+      }
+    }
+  }
+
+
+  setLight() {
+    document.body.classList.remove('dark');
+    if(!isPlatform('capacitor')) return;
+    StatusBar.setBackgroundColor({
+      color: '#ffffff',
+    });
+    StatusBar.setStyle({
+      style: StatusBarStyle.Light,
+    });
+  }
+
+  setDark() {
+    document.querySelector('body').classList.add('dark');
+    if(!isPlatform('capacitor')) return;
+    StatusBar.setBackgroundColor({
+      color: '#323233',
+    });
+    StatusBar.setStyle({
+      style: StatusBarStyle.Dark,
+    });
   }
 }
 

@@ -1,6 +1,6 @@
 
 .header{
-  height: 30vh;
+  height: 35vh;
   width: 100%;
   margin: 0;
   background-image: linear-gradient(100deg, var(--ion-color-custom-secondary), var(--ion-color-custom-primary));
@@ -9,15 +9,14 @@
 
   ion-text{
     color: var(--ion-color-custom-secondary-contrast);
-    p{
+    p {
       margin: 0;
-
     }
   }
 
   .inner-header{
     position: absolute;
-    top: 15%;
+    top: 18%;
     left: 10%;
     width: 80%;
     height: 70%;
@@ -41,7 +40,7 @@
       font-size: 15px;
     }
     .amount{
-      font-size: 40px;
+      font-size: 33px;
     }
 
     .btn-container{
@@ -99,6 +98,7 @@
     .content p{
       font-size: 18px;
       text-align: center;
+      color: var(--ion-color-custom-secondary-contrast);
     }
   }
 }

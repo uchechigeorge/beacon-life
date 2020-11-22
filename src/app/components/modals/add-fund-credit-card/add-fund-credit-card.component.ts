@@ -13,6 +13,7 @@ import { InputValidation } from 'src/app/pages/user-auth/validation';
 export class AddFundCreditCardComponent implements OnInit {
   
   public PageTitle: string = 'Fund Via Credit Card';
+  public PageContentTitle: string = 'Fund Account';
   public FundBtnText: string = 'Fund Account';
 
   public IsValid: boolean = false;
@@ -123,6 +124,7 @@ export class AddFundCreditCardComponent implements OnInit {
         this.inputsChange();
       },
     },
+    // Card CVV
     {
       id: InputID.CardCVV,
       model: this.CardCVVModel,
@@ -188,6 +190,7 @@ export class AddFundCreditCardComponent implements OnInit {
       .then(() => {
         this.proceed();
         this.IsProcessing = false;
+        this.IsValid = false;
       })
   }
 

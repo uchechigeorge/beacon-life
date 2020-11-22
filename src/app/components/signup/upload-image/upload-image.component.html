@@ -1,0 +1,30 @@
+<div class="ion-padding">
+
+  <div class="profile">
+    <div class="picture">
+      <ion-avatar class="ion-text-center">
+        <ion-icon color="medium" name="person"></ion-icon>
+        <ion-img class="ion-hide"></ion-img>
+      </ion-avatar>
+    </div>
+      
+    <div class="ion-activatable btn" (click)="choosePictureAsync()">
+      <ion-icon slot="icon-only" md="camera-sharp" ion="camera-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+
+  <br><br><br>
+
+  <div class="btns">
+    <ion-button size="large" expand="block" (click)="uploadImage()">
+      {{ UploadBtnText }}
+    </ion-button>
+    
+    <br><br>
+    
+    <ion-button class="outline" fill="outline" size="large" expand="block" (click)="skip()">
+      {{ SkipBtnText }}
+    </ion-button>
+  </div>
+</div>
